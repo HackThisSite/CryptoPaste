@@ -1,0 +1,49 @@
+{
+    "name": "hackthiscode/cryptopaste",
+    "version": "v0.1.0",
+    "description": "A secure, client-side encrpyted pastebin.",
+    "license": "GPL-3.0+",
+    "homepage": "https://github.com/HackThisCode/CryptoPaste",
+    "authors": [
+        {
+            "name": "HackThisSite",
+            "email": "staff@hackthissite.org",
+            "homepage": "https://www.hackthissite.org",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "irc": "irc://irc.hackthissite.org/cryptopaste"
+    },
+    "require": {
+        "php": "^7.0",
+        "ext-bcmath": "*",
+        "ext-ctype": "*",
+        "ext-filter": "*",
+        "ext-gd": "*",
+        "ext-hash": "*",
+        "ext-iconv": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "ext-pcre": "*",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "ext-session": "*",
+        "ext-zlib": "*",
+        "silex/silex": "~2.0",
+        "twig/twig": "^2.3",
+        "symfony/asset": "^3.2",
+        "symfony/twig-bridge": "^3.2",
+        "monolog/monolog": "^1.22",
+        "doctrine/dbal": "^2.5",
+        "dapphp/securimage": "^3.6",
+        "symfony/validator": "^3.2",
+        "symfony/security-csrf": "^3.2",
+        "silex/web-profiler": "^2.0",
+        "symfony/monolog-bridge": "^3.2",
+        "symfony/debug-bundle": "^3.2",
+        "sorien/silex-dbal-profiler": "^2.0",
+        "hashids/hashids": "^2.0"
+    }
+}

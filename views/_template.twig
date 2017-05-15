@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A secure, client-side paste bin.">
+    <meta name="author" content="HackThisSite">
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    <title>CryptoPaste{% if title is defined %}{{ ' :: %s'|format(title) }}{% endif %}</title>
+    <link href="{{ asset('bootstrap.min.css', 'css') }}" rel="stylesheet">
+    <link href="{{ asset('ie10-viewport-bug-workaround.css', 'css') }}" rel="stylesheet">
+    <link href="{{ asset('cryptopaste.css', 'css') }}" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+{% block head %}{% endblock %}
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-left" href="{{ path('new') }}"><img src="{{ asset('cryptopaste.png', 'img') }}" id="navbar-img" alt="CryptoPaste icon"></a>
+          <a class="navbar-brand" href="{{ path('new') }}">CryptoPaste</a>
+{% if breadcrumb is defined %}
+          <div class="navbar-text" style="margin:5px 0 0 0;">
+            <div class="well well-sm" style="margin:0;">
+              <i class="glyphicon glyphicon-{{ breadcrumb.icon }}"></i>
+              <strong>{{ breadcrumb.text }}</strong>
+            </div>
+          </div>
+{% endif %}
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ path('faq') }}">FAQ</a></li>
+            <li><a href="{{ path('new') }}">New Paste</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <noscript>
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 text-center">
+            <div class="alert alert-danger">
+              <h1>WARNING</h1>
+              <p><strong>You must enable JavaScript to use this website!</strong></p>
+            </div>
+          </div>
+        </div>
+      </noscript>
+
+      <div class="row collapse" id="erralert">
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+          <div class="alert alert-danger fade in">
+            <button type="button" class="close" id="closeerr">&times;</button>
+            <h3><strong>Error!</strong></h3>
+            <p id="errmsg"></p>
+          </div>
+        </div>
+      </div>
+
+{% block content %}{% endblock %}
+
+    </div>
+
+      <footer class="footer">
+        <div class="container-fluid">
+          <p class="pull-left">
+            <a href="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard" target="_blank">AES-256</a> encryption and password generation achieved
+            client-side using <a href="https://crypto.stanford.edu/sjcl/" target="_blank">SJCL</a>.<br />
+            Syntax highlighting performed client-side using <a href="https://highlightjs.org" target="_blank">Highlight.js</a>. Password strength testing done client-side using <a href="https://github.com/dropbox/zxcvbn" target="_blank">zxcvbn</a>.
+          </p>
+          <p class="pull-right text-right">
+            Powered by <a href="https://github.com/HackThisCode/CryptoPaste" target="_blank">CryptoPaste</a>, a <a href="https://www.hackthissite.org" target="_blank">HackThisSite</a> project &ndash;
+            Download or fork this on <a href="https://github.com/HackThisCode/CryptoPaste" target="_blank">GitHub</a>
+{% if total_pastes is defined %}
+            &ndash; {{ total_pastes }} encrypted pastes
+{% endif %}
+            <br />The owner of this site and the CryptoPaste project cannot be held liable or responsible for user-submitted content.
+          </p>
+        </div>
+      </footer>
+
+    <script src="{{ asset('jquery.min.js', 'js') }}"></script>
+    <script src="{{ asset('bootstrap.min.js', 'js') }}"></script>
+    <script src="{{ asset('ie10-viewport-bug-workaround.js', 'js') }}"></script>
+{% block footerjs %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,42 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #1c1e22;
+}
+body > .container-fluid {
+  padding-top: 0px;
+}
+.container-fluid .text-muted {
+  margin: 20px 0;
+}
+.footer > .container-fluid {
+  padding: 10px 15px 0px 15px;
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 250px;
+}
+form textarea.horiz {
+  resize: horizontal;
+  min-width: 100%;
+}
+.submit-or-clear {
+  margin-top: 30px;
+}
+
+#navbar-img {
+  max-height: 50px;
+  width: auto;
+}

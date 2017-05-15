@@ -1,2 +1,14 @@
-# CryptoPaste
-A secure, browser-side pastebin. https://paste.hackthissite.org
+<img src="https://cryptopaste.org/img/cryptopaste.png" align="left">
+<h1>CryptoPaste</h1>
+A secure, browser-side pastebin.
+
+# Demonstration
+An active demonstration of CryptoPaste can be found at https://cryptopaste.org
+
+# Prerequisites
+- PHP 7
+- Composer
+- MySQL or SQLite
+
+# TODO
+Remaining README todo...

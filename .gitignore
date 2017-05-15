@@ -1,0 +1,5 @@
+vendor/*
+cache/log/*
+cache/profiler/*
+cache/twig/*
+config.ini
