@@ -1,4 +1,4 @@
-<img src="https://cryptopaste.org/img/cryptopaste.png" align="left">
+<img src="https://github.com/HackThisCode/CryptoPaste/raw/master/public/img/cryptopaste.png" align="left">
 <h1>CryptoPaste</h1>
 A secure, browser-side pastebin.
 
