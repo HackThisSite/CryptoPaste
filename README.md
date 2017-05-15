@@ -26,19 +26,19 @@ An active demonstration of CryptoPaste can be found at https://cryptopaste.org
 <pre>
     map $remote_addr $ip_anonym1 {
      default 0.0.0;
-     "~(?P<ip>(\d+)\.(\d+)\.(\d+))\.\d+" $ip;
-     "~(?P<ip>[^:]+:[^:]+):" $ip;
+     "~(?P&lt;ip>(\d+)\.(\d+)\.(\d+))\.\d+" $ip;
+     "~(?P&lt;ip>[^:]+:[^:]+):" $ip;
     }
 
     map $remote_addr $ip_anonym2 {
      default .0;
-     "~(?P<ip>(\d+)\.(\d+)\.(\d+))\.\d+" .0;
-     "~(?P<ip>[^:]+:[^:]+):" ::;
+     "~(?P&lt;ip>(\d+)\.(\d+)\.(\d+))\.\d+" .0;
+     "~(?P&lt;ip>[^:]+:[^:]+):" ::;
     }
 
     map $ip_anonym1$ip_anonym2 $ip_anonymized {
      default 0.0.0.0;
-     "~(?P<ip>.*)" $ip;
+     "~(?P&lt;ip>.*)" $ip;
     }
 
     log_format anonymized '$ip_anonymized - $remote_user [$time_local] ' 
