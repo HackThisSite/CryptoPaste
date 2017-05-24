@@ -65,6 +65,10 @@ An active demonstration of CryptoPaste can be found at https://cryptopaste.org
       }
 </pre>
 
+# Upgrade
+
+Any time you upgrade, you must make sure to flush the `cache/twig/` folder of all content (minus the `.placeholder` file, of course).
+
 # TODO
 - (**Need Help!**) Tidy up all code and add testing
 - (**Need Help!**) Fix the UI to have better responsive scaling and other improvements
