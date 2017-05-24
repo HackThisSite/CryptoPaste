@@ -159,12 +159,16 @@ $app->get('/{paste_id}', function (Request $req, $paste_id) use ($app) {
     } else {
       $burnnotice = 'This paste is set to be deleted from the database once you have opened it, but there was an error doing that. Please inform the owner of this CryptoPaste immediately!';
     }
+  // Update view counter
+  } else {
+    $app['db']->query('UPDATE '.$prefix.'cryptopaste SET `views`=`views`+1 WHERE `id` = ?', array($data['id']));
   }
 
   // Render page
   return $app['twig']->render('view_paste.twig', array(
-    'timestamp'  => $data['timestamp'],
+    'timestamp'  => gmdate('r', $data['timestamp']),
     'paste'      => $data['data'],
+    'views'      => $data['views'],
     'burnnotice' => $burnnotice,
   ));
 })->bind('view')
