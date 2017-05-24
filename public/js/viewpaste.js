@@ -1,64 +1,41 @@
-/*
-	Helper functions
-*/
-
-function getElapsedTime(time) {
-	var seconds = Date.now() / 1000 - time;
-
-	var minutes = seconds / 60;
-	seconds %= 60;
-
-	var hours = minutes / 60;
-	minutes %= 60;
-
-	var days = hours / 24;
-	hours %= 24;
-
-	var weeks = days / 7;
-	days %= 7;
-
-	var years = weeks / 52;
-	weeks %= 52;
-
-	var elapsedTime = "";
-
-	if (years >= 1) {
-		elapsedTime += Math.floor(years) + "y ";
-	}
-
-	if (weeks >= 1 || elapsedTime) {
-		elapsedTime += Math.floor(weeks) + "w ";
-	}
-
-	if (days >= 1 || elapsedTime) {
-		elapsedTime += Math.floor(days) + "d ";
-	}
-
-	if (hours >= 1 || elapsedTime) {
-		elapsedTime += Math.floor(hours) + "h ";
-	}
-
-	if (minutes >= 1 || elapsedTime) {
-		elapsedTime += Math.floor(minutes) + "m ";
-	}
-
-	if (seconds >= 1 || elapsedTime) {
-		elapsedTime += Math.floor(seconds) + "s";
-	}
-
-	return elapsedTime;
+// Set elapsed time
+function setElapsedTime() {
+  // Set number values
+  var seconds = Date.now() / 1000 - timestamp;
+  var minutes = seconds / 60;
+  seconds %= 60;
+  var hours = minutes / 60;
+  minutes %= 60;
+  var days = hours / 24;
+  hours %= 24;
+  var weeks = days / 7;
+  days %= 7;
+  var years = weeks / 52;
+  weeks %= 52;
+  // Create string
+  var elapsedTime = "";
+  if (years >= 1) {
+    elapsedTime += Math.floor(years) + "y ";
+  }
+  if (weeks >= 1 || elapsedTime) {
+    elapsedTime += Math.floor(weeks) + "w ";
+  }
+  if (days >= 1 || elapsedTime) {
+    elapsedTime += Math.floor(days) + "d ";
+  }
+  if (hours >= 1 || elapsedTime) {
+    elapsedTime += Math.floor(hours) + "h ";
+  }
+  if (minutes >= 1 || elapsedTime) {
+    elapsedTime += Math.floor(minutes) + "m ";
+  }
+  if (seconds >= 1 || elapsedTime) {
+    elapsedTime += Math.floor(seconds) + "s";
+  }
+  // Set string to element
+  var timestr = new Date(timestamp * 1000).toLocaleString();
+  $("#timestamp").html(timestr+' (<em>'+elapsedTime+' ago</em>)');
 }
-
-function startElapsedTimer(time) {
-	document.getElementById("datetime").innerHTML = new Date(time * 1000).toLocaleString();
-	setInterval(function() {
-		document.getElementById("time").innerHTML = getElapsedTime(time);
-	}, 1000);
-}
-
-
-
-
 
 // Show error alert
 function showError(message) {
@@ -115,6 +92,12 @@ $(document).ready(function() {
     hljs.highlightBlock($("#paste").get(0));
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   });
+
+  // Update and start timestamp counter
+  setElapsedTime();
+  setInterval(function() {
+    setElapsedTime();
+  }, 1000);
 
   // Password field key press
   $("#password").keypress(function(event) {

@@ -9,6 +9,9 @@
 <script type="text/javascript" src="{{ asset('aes.js', 'js') }}">/* AES (Advanced Encryption Standard) implementation from Movable Type for backwards compatibility */</script>
 <script type="text/javascript" src="{{ asset('highlight.pack.js', 'js') }}"></script>
 <script type="text/javascript" src="{{ asset('viewpaste.js', 'js') }}"></script>
+<script>
+  var timestamp = {{ timestamp }};
+</script>
 {% endblock %}
 {% block content %}
 <div class="row" id="loading">
@@ -34,8 +37,14 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="well well-sm">
-        <p class="pull-left">Created: {{ timestamp }}</p>
-        <p class="pull-right">Views: {{ views }}</p>
+        <div class="form-group">
+          <p class="pull-left">
+            Created: <span id="timestamp">-</span>
+          </p>
+          <p class="pull-right">
+            Views: {{ views }}
+          </p>
+        </div>
       </div>
     </div>
   </div>

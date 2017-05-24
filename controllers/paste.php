@@ -161,14 +161,14 @@ $app->get('/{paste_id}', function (Request $req, $paste_id) use ($app) {
     }
   // Update view counter
   } else {
-    $app['db']->query('UPDATE '.$prefix.'cryptopaste SET `views`=`views`+1 WHERE `id` = ?', array($data['id']));
+    $app['db']->executeQuery('UPDATE '.$prefix.'cryptopaste SET `views`=`views`+1 WHERE `id` = ?', array($data['id']));
   }
 
   // Render page
   return $app['twig']->render('view_paste.twig', array(
-    'timestamp'  => gmdate('r', $data['timestamp']),
+    'timestamp'  => $data['timestamp'],
     'paste'      => $data['data'],
-    'views'      => $data['views'],
+    'views'      => ++$data['views'],
     'burnnotice' => $burnnotice,
   ));
 })->bind('view')

@@ -12,7 +12,7 @@
 </div>
 {% if global.debug %}
 <pre>
-{{ debug }}
+{{ debug|default('') }}
 </pre>
 {% endif %}
 {% endblock %}
