@@ -2,6 +2,13 @@
 <h1>CryptoPaste</h1>
 A secure, browser-side pastebin.
 
+# Features
+- Pastes are encrypted before being sent to the server
+- No passwords stored
+- All identifying information is anonymized
+- Expired content is deleted forever
+- CRON for enforced expiration
+
 # Demonstration
 An active demonstration of CryptoPaste can be found at https://cryptopaste.org
 
@@ -63,6 +70,12 @@ An active demonstration of CryptoPaste can be found at https://cryptopaste.org
         fastcgi_param PATH_INFO $fastcgi_script_name;
         fastcgi_param SERVER_NAME $host;
       }
+</pre>
+
+6. Add a CRON entry to force deletion of expired pastes.  Here is an example crontab entry that is run every 5 minutes as the `www-data` user:
+
+<pre>
+*/5	*	*	*	*	www-data	/usr/bin/php /var/www/cryptopaste/cron.php >> /var/log/cryptopaste-cron.log
 </pre>
 
 # Upgrade
