@@ -11,8 +11,7 @@
 <script type="text/javascript" src="{{ asset('zxcvbn.js', 'js') }}"></script>
 <script type="text/javascript" src="{{ asset('smoothscroll.js', 'js') }}"></script>
 <script type="text/javascript" src="{{ asset('clipboard.min.js', 'js') }}"></script>
-<script type="text/javascript" src="{{ asset('newpaste.js', 'js') }}">
-</script>
+<script type="text/javascript" src="{{ asset('newpaste.js', 'js') }}"></script>
 <script type="text/javascript" src="captcha.js"></script>
 <script type="text/javascript">
   captcha_image_audioObj = new SecurimageAudio({ audioElement: 'captcha_image_audio', controlsElement: 'captcha_image_audio_controls' });
@@ -128,32 +127,27 @@
               </label>
 
               <div class="row">
-                <div class="col-lg-8">
-                  <p class="text-right">
-<!--
-                    <img id="captcha_image" src="captcha.png?{{ random() ~ random() }}" alt="CAPTCHA Image">
--->
-                    <img id="captcha_image" src="{{ path('captcha', {'_format': 'png'}) }}?{{ random() ~ random() }}" alt="CAPTCHA Image">
-                  </p>
-                </div>
-                <div class="col-lg-4 text-left">
-                  <div id="captcha_image_audio_div">
-                    <audio id="captcha_image_audio" preload="none" style="display: none">
-                      <source id="captcha_image_source_wav" src="{{ path('captcha', {'_format': 'wav'}) }}?id={{ random() ~ random() }}" type="audio/wav">
-                      <object type="application/x-shockwave-flash" data="{{ path('captcha', {'_format': 'swf'}) }}?bgcol=%23ffffff&amp;icon_file={{ path('cimg', {'img': 'audio_icon.png'})|url_encode }}&amp;audio_file={{ path('captcha', {'_format': 'mp3'})|url_encode }}" height="32" width="32">
-                        <param name="movie" value="{{ path('captcha', {'_format': 'swf'}) }}?bgcol=%23ffffff&amp;icon_file={{ path('cimg', {'img': 'audio_icon.png'})|url_encode }}&amp;audio_file={{ path('captcha', {'_format': 'mp3'})|url_encode }}">
-                      </object>
-                    </audio>
-                  </div>
-                  <div id="captcha_image_audio_controls">
-                    <button type="button" tabindex="-1" class="btn btn-primary btn-sm captcha_play_button" href="{{ path('captcha', {'_format': 'wav'}) }}?id={{ random() ~ random() }}" onclick="return false">
-                      <img class="captcha_play_image" height="32" width="32" src="{{ path('cimg', {'img': 'audio_icon.png'}) }}" alt="Play CAPTCHA Audio" style="border: 0px">
-                      <img class="captcha_loading_image rotating" height="32" width="32" src="{{ path('cimg', {'img': 'loading.png'}) }}" alt="Loading audio" style="display: none">
+                <div class="col-lg-12">
+                  <img class="img-responsive pull-left" id="captcha_image" src="{{ path('captcha', {'_format': 'png'}) }}?{{ random() ~ random() }}" alt="CAPTCHA Image">
+                  <p class="pull-right">
+                    <div id="captcha_image_audio_div">
+                      <audio id="captcha_image_audio" preload="none" style="display: none">
+                        <source id="captcha_image_source_wav" src="{{ path('captcha', {'_format': 'wav'}) }}?id={{ random() ~ random() }}" type="audio/wav">
+                        <object type="application/x-shockwave-flash" data="{{ path('captcha', {'_format': 'swf'}) }}?bgcol=%23ffffff&amp;icon_file={{ path('cimg', {'img': 'audio_icon.png'})|url_encode }}&amp;audio_file={{ pat$
+                          <param name="movie" value="{{ path('captcha', {'_format': 'swf'}) }}?bgcol=%23ffffff&amp;icon_file={{ path('cimg', {'img': 'audio_icon.png'})|url_encode }}&amp;audio_file={{ path('captcha', {'_format$
+                        </object>
+                      </audio>
+                    </div>
+                    <div id="captcha_image_audio_controls">
+                      <button type="button" tabindex="-1" class="btn btn-primary btn-sm captcha_play_button" href="{{ path('captcha', {'_format': 'wav'}) }}?id={{ random() ~ random() }}" onclick="return false">
+                        <img class="captcha_play_image" height="32" width="32" src="{{ path('cimg', {'img': 'audio_icon.png'}) }}" alt="Play CAPTCHA Audio" style="border: 0px">
+                        <img class="captcha_loading_image rotating" height="32" width="32" src="{{ path('cimg', {'img': 'loading.png'}) }}" alt="Loading audio" style="display: none">
+                      </button>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" id="captcha_refresh" tabindex="-1" style="border: 0" title="Refresh CAPTCHA">
+                      <img height="32" width="32" src="{{ path('cimg', {'img': 'refresh.png'}) }}" alt="Refresh Image" onclick="this.blur()" style="border: 0px; vertical-align: bottom">
                     </button>
-                  </div>
-                  <button type="button" class="btn btn-primary btn-sm" id="captcha_refresh" tabindex="-1" style="border: 0" title="Refresh CAPTCHA">
-                    <img height="32" width="32" src="{{ path('cimg', {'img': 'refresh.png'}) }}" alt="Refresh Image" onclick="this.blur()" style="border: 0px; vertical-align: bottom">
-                  </button>
+                  </p>
                 </div>
               </div>
               <input type="text" name="captcha" class="form-control npinput" id="captcha_code" placeholder="Type the CAPTCHA text here">
