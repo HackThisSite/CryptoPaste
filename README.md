@@ -24,7 +24,7 @@ An active demonstration of CryptoPaste can be found at https://cryptopaste.org
 `$ composer install`
 
 2. Install `resources/cryptopaste.mysql.sql` into your MySQL database and create a user with SELECT, INSERT, UPDATE, and DELETE grants
-   - For SQLite, use the `resources/cryptopaste.mysql.sql` file
+   - For SQLite, use the `resources/cryptopaste.sqlite.sql` file
 
 3. Copy `config.ini.example` to `config.ini` and edit the values
 
