@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<dataset>
+  <table name="cryptopaste">
+    <column>id</column>
+    <column>timestamp</column>
+    <column>expiry</column>
+    <column>views</column>
+    <column>data</column>
+  </table>
+</dataset>
