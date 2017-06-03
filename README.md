@@ -75,7 +75,7 @@ An active demonstration of CryptoPaste can be found at https://cryptopaste.org
 6. Add a CRON entry to force deletion of expired pastes.  Here is an example crontab entry that is run every 5 minutes as the `www-data` user:
 
 <pre>
-*/5	*	*	*	*	www-data	/usr/bin/php /var/www/cryptopaste/cron.php >> /var/log/cryptopaste-cron.log
+*/5	*	*	*	*	www-data	/usr/bin/php /var/www/cryptopaste/src/cron.php >> /var/log/cryptopaste-cron.log
 </pre>
 
 # Upgrade
