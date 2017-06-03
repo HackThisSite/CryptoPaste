@@ -116,10 +116,22 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 
 
 //
-// Register MySQL database connection
+// Register database connection
 //
-$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
-  'db.options' => array(
+if (strtolower($app['config']['db']['driver']) == 'sqlite') {
+  if (strtolower($app['config']['db']['path']) == 'memory') {
+    $dbopts = array(
+      'driver' => 'pdo_sqlite',
+      'memory' => true,
+    );
+  } else {
+    $dbopts = array(
+      'driver' => 'pdo_sqlite',
+      'path'   => $app['config']['db']['path'],
+    );
+  }
+} else if (strtolower($app['config']['db']['driver']) == 'mysql') {
+  $dbopts = array(
     'driver'   => 'pdo_mysql',
     'host'     => $app['config']['db']['host'],
     'port'     => $app['config']['db']['port'],
@@ -127,7 +139,10 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'password' => $app['config']['db']['password'],
     'dbname'   => $app['config']['db']['database'],
     'charset'  => 'utf8',
-  ),
+  );
+}
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+  'db.options' => $dbopts,
 ));
 
 
