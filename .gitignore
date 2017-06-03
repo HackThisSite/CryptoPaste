@@ -2,4 +2,5 @@ vendor/*
 cache/log/*
 cache/profiler/*
 cache/twig/*
+resources/cryptopaste.db
 config.ini

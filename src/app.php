@@ -118,19 +118,12 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 //
 // Register database connection
 //
-if (strtolower($app['config']['db']['driver']) == 'sqlite') {
-  if (strtolower($app['config']['db']['path']) == 'memory') {
-    $dbopts = array(
-      'driver' => 'pdo_sqlite',
-      'memory' => true,
-    );
-  } else {
-    $dbopts = array(
-      'driver' => 'pdo_sqlite',
-      'path'   => $app['config']['db']['path'],
-    );
-  }
-} else if (strtolower($app['config']['db']['driver']) == 'mysql') {
+if ($app['config']['db']['driver'] == 'sqlite') {
+  $dbopts = array(
+    'driver' => 'pdo_sqlite',
+    'path'   => $app['config']['db']['path'],
+  );
+} else if ($app['config']['db']['driver'] == 'mysql') {
   $dbopts = array(
     'driver'   => 'pdo_mysql',
     'host'     => $app['config']['db']['host'],
@@ -199,9 +192,17 @@ $app->before(function (Request $req) use ($app) {
   // Total pastes (deleted and active)
   if ($app['config']['ui']['show_paste_total']) {
     $prefix = (!empty($app['config']['db']['table_prefix']) ? $app['config']['db']['table_prefix'] : '');
-    $query = 'SELECT AUTO_INCREMENT AS next_id FROM information_schema.tables WHERE table_name="'.$prefix.'cryptopaste" AND table_schema=DATABASE()';
-    $result = $app['db']->fetchAssoc($query);
-    $app['twig']->addGlobal('total_pastes', number_format($result['next_id'] - 1));
+    if ($app['config']['db']['driver'] == 'mysql') {
+      $query = 'SELECT AUTO_INCREMENT AS next_id FROM information_schema.tables WHERE table_name="'.$prefix.'cryptopaste" AND table_schema=DATABASE()';
+      $result = $app['db']->fetchAssoc($query);
+      $total = $result['next_id'] - 1;
+    } else if ($app['config']['db']['driver'] == 'sqlite') {
+      $query = 'SELECT * FROM SQLITE_SEQUENCE WHERE name = ?';
+      $result = $app['db']->fetchAssoc($query, array($prefix.'cryptopaste'));
+      $ressplit = explode('|', $result['seq']);
+      $total = (count($ressplit) > 1 ? $ressplit[1] : 0);
+    }
+    $app['twig']->addGlobal('total_pastes', number_format($total));
   }
 });
 
