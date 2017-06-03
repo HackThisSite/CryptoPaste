@@ -1,5 +1,5 @@
 <img src="https://github.com/HackThisCode/CryptoPaste/raw/master/public/img/cryptopaste.png" align="left">
-<h1>CryptoPaste</h1>
+<h1>CryptoPaste <a href="https://travis-ci.org/HackThisCode/CryptoPaste" title="Travis-CI Build Status"><img src="https://travis-ci.org/HackThisCode/CryptoPaste.svg?branch=master"></a></h1>
 A secure, browser-side pastebin.
 
 # Features
@@ -83,7 +83,8 @@ An active demonstration of CryptoPaste can be found at https://cryptopaste.org
 Any time you upgrade, you must make sure to flush the `cache/twig/` folder of all content (minus the `.placeholder` file, of course).
 
 # TODO
-- (**Need Help!**) Tidy up all code and add testing
+- (**Need Help!**) Write legitimate testing
+- (**Need Help!**) Tidy up all code
 - (**Need Help!**) Fix the UI to have better responsive scaling and other improvements
 - Finish README
 
