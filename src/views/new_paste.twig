@@ -133,8 +133,8 @@
                     <div id="captcha_image_audio_div">
                       <audio id="captcha_image_audio" preload="none" style="display: none">
                         <source id="captcha_image_source_wav" src="{{ path('captcha', {'_format': 'wav'}) }}?id={{ random() ~ random() }}" type="audio/wav">
-                        <object type="application/x-shockwave-flash" data="{{ asset('securimage_play.swf, 'securimage') }}?bgcol=%23ffffff&amp;icon_fiile={{ asset('audio_icon.png', 'secureimage')|url_encode }}&amp;audio_file={{ path('captcha', {'_format': 'mp3'})|url_encode }}" height="32" width="32">
-                          <param name="movie" value="{{ asset('securimage_play.swf, 'securimage') }}?bgcol=%23ffffff&amp;icon_file={{ asset('audio_icon.png', 'secureimage')|url_encode }}&amp;audio_file={{ path('captcha', {'_format': 'mp3'})|url_encode }}">
+                        <object type="application/x-shockwave-flash" data="{{ asset('securimage_play.swf', 'securimage') }}?bgcol=%23ffffff&amp;icon_fiile={{ asset('audio_icon.png', 'secureimage')|url_encode }}&amp;audio_file={{ path('captcha', {'_format': 'mp3'})|url_encode }}" height="32" width="32">
+                          <param name="movie" value="{{ asset('securimage_play.swf', 'securimage') }}?bgcol=%23ffffff&amp;icon_file={{ asset('audio_icon.png', 'secureimage')|url_encode }}&amp;audio_file={{ path('captcha', {'_format': 'mp3'})|url_encode }}">
                         </object>
                       </audio>
                     </div>
