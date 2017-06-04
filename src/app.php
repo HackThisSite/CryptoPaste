@@ -212,7 +212,7 @@ $app->before(function (Request $req) use ($app) {
 // Rotate session IDs to prevent reuse
 //
 $app->after(function (Request $req) use ($app) {
-  if ($app['session']->isStarted()) {
+  if ($app['session']->isStarted() && !headers_sent()) {
     $app['monolog']->debug('Rotating session ID');
     $app['session']->migrate(true);
   }
