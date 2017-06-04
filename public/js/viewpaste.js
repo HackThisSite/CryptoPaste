@@ -90,7 +90,11 @@ $(document).ready(function() {
         .addClass('hljs lang-'+$(this).val());
     }
     hljs.highlightBlock($("#paste").get(0));
-    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    try {
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    } catch (e) {
+      window.scrollTo(0,0);
+    }
   });
 
   // Update and start timestamp counter
@@ -140,7 +144,11 @@ $(document).ready(function() {
         .val(null);
 
       // Scroll to top
-      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+      try {
+        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+      } catch (e) {
+        window.scrollTo(0,0);
+      }
     } catch (e) {
       showError(e);
     }
@@ -154,7 +162,11 @@ $(document).ready(function() {
   // Hide loading screen and show paste once everything is loaded
   $("#loading").slideUp('fast', function() {
     $("#view-paste").slideDown('fast', function() {
-      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+      try {
+        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+      } catch (e) {
+        window.scrollTo(0,0);
+      }
 //      hljs.initHighlighting();
     });
   });

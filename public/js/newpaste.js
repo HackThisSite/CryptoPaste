@@ -193,7 +193,11 @@ $(document).ready(function() {
             // Hide form and show submitted dialog
             $("#new-paste").slideUp('fast', function() {
               // Slide the window up
-              window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+              try {
+                window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+              } catch (e) {
+                window.scrollTo(0,0);
+              }
 
               // Set paste URL
               $("#paste-url").val(data.url);
@@ -242,7 +246,11 @@ $(document).ready(function() {
             showError(json.message);
 
             // Slide the window up
-            window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+            try {
+              window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+            } catch (e) {
+              window.scrollTo(0,0);
+            }
           }
         });
 
@@ -281,7 +289,11 @@ $(document).ready(function() {
   // Hide loading screen and show form once everything is loaded
   $("#loading").slideUp('fast', function() {
     $("#new-paste").slideDown('fast', function() {
-      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+      try {
+        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+      } catch (e) {
+        window.scrollTo(0,0);
+      }
       $("#paste").focus();
     });
   });
