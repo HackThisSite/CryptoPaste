@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 $app->get('/', function (Request $req) use ($app) {
   // Generate CSRF nonce token
   $nonce = $app['csrf.token_manager']->refreshToken('paste');
+  $app['monolog']->debug('Nonce(paste) set to: '.$nonce);
 
   return $app['twig']->render('new_paste.twig', array(
     'nonce' => $nonce,
@@ -39,6 +40,7 @@ $app->post('/process.json', function (Request $req) use ($app) {
 
   // - Nonce
   if (empty($nonce) || !$app['csrf.token_manager']->isTokenValid(new CsrfToken('paste', $nonce))) {
+    $app['monolog']->debug('Nonce(paste) invalid: '.$nonce);
     return paste_error($app, 'Invalid nonce, please refresh the page and try again.');
   }
 
