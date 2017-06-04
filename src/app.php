@@ -175,10 +175,11 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 //
 $app->register(new Silex\Provider\AssetServiceProvider(), array(
   'assets.named_packages' => array(
-    'css'	=> array('base_path' => '/css'),
-    'hjscss'	=> array('base_path' => '/css/hjs'),
-    'js'	=> array('base_path' => '/js'),
-    'img'	=> array('base_path' => '/img'),
+    'css'        => array('base_path' => '/css'),
+    'hjscss'     => array('base_path' => '/css/hjs'),
+    'js'         => array('base_path' => '/js'),
+    'img'        => array('base_path' => '/img'),
+    'securimage' => array('base_path' => '/securimage'),
   ),
 ));
 

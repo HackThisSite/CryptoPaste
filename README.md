@@ -58,6 +58,11 @@ An active demonstration of CryptoPaste can be found at https://cryptopaste.org
 5. In your `nginx.conf`, in the `server` block, this is all you need to run the CryptoPaste app:
 
 <pre>
+      location ~ /securimage/(images/.*|securimage(_play\.swf|\.js|\.css))$ {
+        try_files $uri $uri/ =404;
+        alias /var/www/cryptopaste/vendor/dapphp;
+      }
+
       location / {
         try_files $uri /index.php$is_args$args;
       }
