@@ -133,19 +133,19 @@
                     <div id="captcha_image_audio_div">
                       <audio id="captcha_image_audio" preload="none" style="display: none">
                         <source id="captcha_image_source_wav" src="{{ path('captcha', {'_format': 'wav'}) }}?id={{ random() ~ random() }}" type="audio/wav">
-                        <object type="application/x-shockwave-flash" data="{{ asset('securimage_play.swf', 'securimage') }}?bgcol=%23ffffff&amp;icon_fiile={{ asset('audio_icon.png', 'securimage')|url_encode }}&amp;audio_file={{ path('captcha', {'_format': 'mp3'})|url_encode }}" height="32" width="32">
-                          <param name="movie" value="{{ asset('securimage_play.swf', 'securimage') }}?bgcol=%23ffffff&amp;icon_file={{ asset('audio_icon.png', 'securimage')|url_encode }}&amp;audio_file={{ path('captcha', {'_format': 'mp3'})|url_encode }}">
+                        <object type="application/x-shockwave-flash" data="{{ asset('securimage_play.swf', 'securimage') }}?bgcol=%23ffffff&amp;icon_fiile={{ asset('images/audio_icon.png', 'securimage')|url_encode }}&amp;audio_file={{ path('captcha', {'_format': 'mp3'})|url_encode }}" height="32" width="32">
+                          <param name="movie" value="{{ asset('securimage_play.swf', 'securimage') }}?bgcol=%23ffffff&amp;icon_file={{ asset('images/audio_icon.png', 'securimage')|url_encode }}&amp;audio_file={{ path('captcha', {'_format': 'mp3'})|url_encode }}">
                         </object>
                       </audio>
                     </div>
                     <div id="captcha_image_audio_controls">
                       <button type="button" tabindex="-1" class="btn btn-primary btn-sm captcha_play_button" href="{{ path('captcha', {'_format': 'wav'}) }}?id={{ random() ~ random() }}" onclick="return false">
-                        <img class="captcha_play_image" height="32" width="32" src="{{ asset('audio_icon.png', 'securimage') }}" alt="Play CAPTCHA Audio" style="border: 0px">
-                        <img class="captcha_loading_image rotating" height="32" width="32" src="{{ asset('loading.png', 'securimage') }}" alt="Loading audio" style="display: none">
+                        <img class="captcha_play_image" height="32" width="32" src="{{ asset('images/audio_icon.png', 'securimage') }}" alt="Play CAPTCHA Audio" style="border: 0px">
+                        <img class="captcha_loading_image rotating" height="32" width="32" src="{{ asset('images/loading.png', 'securimage') }}" alt="Loading audio" style="display: none">
                       </button>
                     </div>
                     <button type="button" class="btn btn-primary btn-sm" id="captcha_refresh" tabindex="-1" style="border: 0" title="Refresh CAPTCHA">
-                      <img height="32" width="32" src="{{ asset('refresh.png', 'securimage') }}" alt="Refresh Image" onclick="this.blur()" style="border: 0px; vertical-align: bottom">
+                      <img height="32" width="32" src="{{ asset('images/refresh.png', 'securimage') }}" alt="Refresh Image" onclick="this.blur()" style="border: 0px; vertical-align: bottom">
                     </button>
                   </p>
                 </div>
