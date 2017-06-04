@@ -212,7 +212,7 @@ $app->before(function (Request $req) use ($app) {
 // Rotate session IDs to prevent reuse
 //
 $app->after(function (Request $req) use ($app) {
-  if ($app['session']->isStarted() && !headers_sent()) {
+  if ($app['session']->isStarted()) {
     $app['monolog']->debug('Rotating session ID');
     $app['session']->migrate(true);
   }
@@ -257,12 +257,6 @@ $controllers = array(
 foreach ($controllers as $controller) {
   require_once BASE_DIR.'/src/controllers/'.$controller.'.php';
 }
-
-
-//
-// Run application
-//
-$app->run();
 
 
 //### EOF
