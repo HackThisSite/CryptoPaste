@@ -17,10 +17,17 @@
  *                                                           *
  *************************************************************/
 
+
+//
+// Set base working directory global
+//
+define('BASE_DIR', realpath(dirname(__FILE__).'/../'));
+
+
 //
 // Load Composer autoloader
 //
-require_once __DIR__.'/../vendor/autoload.php';
+require_once BASE_DIR.'/vendor/autoload.php';
 
 
 //
@@ -32,7 +39,7 @@ $app = new Silex\Application();
 //
 // Load application source
 //
-require_once __DIR__.'/../src/app.php';
+require_once BASE_DIR.'/src/app.php';
 
 
 //

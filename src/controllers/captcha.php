@@ -127,7 +127,7 @@ $app->get('/captcha.{_format}', function (Request $req) use ($app) {
   // Passthru CAPTCHA files
   } else {
 
-    $thispath = realpath(__DIR__.'/../../vendor/dapphp/securimage');
+    $thispath = realpath(BASE_DIR.'/vendor/dapphp/securimage');
     $file = realpath($thispath.'/'.$format_map[$format][0]);
     if (substr($file, 0, strlen($thispath)) !== $thispath || !file_exists($file)) {
       $app->abort(404, 'Invalid CAPTCHA file');
@@ -147,7 +147,7 @@ $app->get('/captcha.{_format}', function (Request $req) use ($app) {
 // GET /cimg/{img} - CAPTCHA static images
 //
 $app->get('/cimg/{img}', function (Request $req, $img) use ($app) {
-  $thispath = realpath(__DIR__.'/../../vendor/dapphp/securimage/images');
+  $thispath = realpath(BASE_DIR.'/vendor/dapphp/securimage/images');
   $file = realpath($thispath.'/'.$img);
   if (substr($file, 0, strlen($thispath)) !== $thispath || !file_exists($file)) {
     $app->abort(404, 'Invalid image path');

@@ -39,7 +39,7 @@ ExceptionHandler::register();
 //
 // Load and test global application configuration
 //
-$config = @parse_ini_file(__DIR__.'/../config.ini', true);
+$config = @parse_ini_file(BASE_DIR.'/config.ini', true);
 if ($config === FALSE) throw new ErrorException('Cannot find config.ini');
 $app['config'] = $config;
 unset($config);
@@ -109,7 +109,7 @@ if (isset($app['config']['global']['log_level'])) {
   $log_level = Logger::WARNING;
 }
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
-  'monolog.logfile' => __DIR__.'/../cache/log/cryptopaste.log',
+  'monolog.logfile' => BASE_DIR.'/cache/log/cryptopaste.log',
   'monolog.level'   => $log_level,
   'monolog.name'    => 'CRYPTOPASTE',
 ));
@@ -158,14 +158,14 @@ $app->register(new Silex\Provider\SessionServiceProvider(), array(
 // Register views service
 //
 $twig_opts = array(
-  'cache' => __DIR__.'/../cache/twig',
+  'cache' => BASE_DIR.'/cache/twig',
 );
 if ($app['development']) {
   $twig_opts['debug'] = true;
   $twig_opts['auto_reload'] = true;
 }
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-  'twig.path'    => __DIR__.'/views',
+  'twig.path'    => BASE_DIR.'/src/views',
   'twig.options' => $twig_opts,
 ));
 
@@ -238,7 +238,7 @@ $app->register(new Silex\Provider\CsrfServiceProvider());
 if ($app['development']) {
   $app->register(new Silex\Provider\HttpFragmentServiceProvider());
   $app->register(new Silex\Provider\WebProfilerServiceProvider(), array(
-    'profiler.cache_dir'    => __DIR__.'/../cache/profiler',
+    'profiler.cache_dir'    => BASE_DIR.'/cache/profiler',
     'profiler.mount_prefix' => '/_profiler', // Needs to be unique since this is the URI prefix
   ));
   $app->register(new Sorien\Provider\DoctrineProfilerServiceProvider());
@@ -254,7 +254,7 @@ $controllers = array(
   'paste', // This should always be last
 );
 foreach ($controllers as $controller) {
-  require_once __DIR__.'/controllers/'.$controller.'.php';
+  require_once BASE_DIR.'/src/controllers/'.$controller.'.php';
 }
 
 

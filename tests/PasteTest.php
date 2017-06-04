@@ -1,4 +1,11 @@
 <?php
+
+//
+// Set base working directory global
+//
+define('BASE_DIR', realpath(dirname(__FILE__).'/../'));
+
+
 // TODO - This needs done
 
 use PHPUnit\Framework\TestCase;
@@ -27,7 +34,7 @@ class PasteTest extends TestCase {
    * @return PHPUnit_Extensions_Database_DataSet_IDataSet
    */
   public function getDataSet() {
-    $ds = $this->createXMLDataSet(dirname(__FILE__).'/_files/db.xml');
+    $ds = $this->createXMLDataSet(BASE_DIR.'/tests/_files/db.xml');
     $rds = new PHPUnit_Extensions_Database_DataSet_ReplacementDataSet($ds);
 //    $rds->addFullReplacement('##EXPIRY##', time()+5);
     return $rds;

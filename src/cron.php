@@ -17,10 +17,17 @@
  *                                                           *
  *************************************************************/
 
+
+//
+// Set base working directory global
+//
+define('BASE_DIR', realpath(dirname(__FILE__).'/../'));
+
+
 //
 // Load Composer autoloader
 //
-require_once __DIR__.'/vendor/autoload.php';
+require_once BASE_DIR.'/vendor/autoload.php';
 
 
 //
@@ -33,7 +40,7 @@ use Doctrine\DBAL\DriverManager;
 //
 // Load and test global application configuration
 //
-$config = @parse_ini_file(__DIR__.'/config.ini', true);
+$config = @parse_ini_file(BASE_DIR.'/config.ini', true);
 if ($config === FALSE) throw new ErrorException('Cannot find config.ini');
 // Assert [db]
 assert(!empty($config['db']), 'db category is set');
@@ -74,5 +81,5 @@ $prefix = (!empty($config['db']['table_prefix']) ? $config['db']['table_prefix']
 $count = $db->executeUpdate('DELETE FROM '.$prefix.'cryptopaste WHERE `expiry` NOT IN (-1, 0) AND UNIX_TIMESTAMP(NOW()) >= `expiry`');
 
 if ($count > 0) {
-  echo 'Deleted '.$count." row(s).\n";
+  echo '['.gmdate('r').'] Deleted '.$count." row(s).\n";
 }
