@@ -2,6 +2,10 @@
 <h1>CryptoPaste <a href="https://travis-ci.org/HackThisCode/CryptoPaste" title="Travis-CI Build Status"><img src="https://travis-ci.org/HackThisCode/CryptoPaste.svg?branch=master"></a></h1>
 A secure, browser-side pastebin.
 
+# About
+
+CryptoPaste is a secure pastebin service inspired by [CryptoBin](https://cryptobin.org). Like CryptoBin, CryptoPaste strives to be a secure, stable and clean pastebin service, especially now that CryptoBin has seemingly shut its doors indefinitely.  The goal is to perform all encryption, decryption, and data handling in the user's browser so that the CryptoPaste host has both plausible deniability and the inability to comply with court orders or takedown requests.
+
 # Features
 - Pastes are encrypted before being sent to the server
 - No passwords stored
@@ -11,6 +15,11 @@ A secure, browser-side pastebin.
 
 # Demonstration
 An active demonstration of CryptoPaste can be found at https://cryptopaste.org
+
+# TODO
+- (**Need Help!**) Write legitimate testing
+- (**Need Help!**) Tidy up all code
+- (**Need Help!**) Fix the UI to have better responsive scaling and other improvements
 
 # Prerequisites
 - PHP 7
@@ -87,9 +96,17 @@ An active demonstration of CryptoPaste can be found at https://cryptopaste.org
 
 Any time you upgrade, you must make sure to flush the `cache/twig/` folder of all content (minus the `.placeholder` file, of course).
 
-# TODO
-- (**Need Help!**) Write legitimate testing
-- (**Need Help!**) Tidy up all code
-- (**Need Help!**) Fix the UI to have better responsive scaling and other improvements
-- Finish README
+# Acknowledgements
 
+CryptoPaste uses the following technologies:
+* Sensio Labs frameworks ([Silex](https://silex.sensiolabs.org), [Symfony components](http://symfony.com/components), [Twig](https://twig.sensiolabs.org))
+* [Composer](https://getcomposer.org), [phpUnit](https://phpunit.de)
+* Client-side JavaScript libraries and frameworks:
+  * [Bootstrap](http://getbootstrap.com) and [jQuery](https://jquery.com)
+  * AES encryption and password generation from the [Stanford Javascript Crypto Library](https://crypto.stanford.edu/sjcl/)
+  * AES backward compatability by [Moveable Type](http://www.movable-type.co.uk/scripts/aes.html)
+  * Syntax highlighting by [Highlight.js](https://highlightjs.org)
+  * Password strength testing by [zxcvbn](https://github.com/dropbox/zxcvbn)
+  * [smoothscroll polyfill](https://iamdustan.github.io/smoothscroll)
+  * [clipboard.js](https://zenorocha.github.io/clipboard.js)
+* [Travis-CI](https://travis-ci.org), [CLA Assistant](https://cla-assistant.io)
