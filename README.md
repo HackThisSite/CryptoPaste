@@ -1,4 +1,4 @@
-<img src="https://github.com/HackThisCode/CryptoPaste/raw/master/public/img/cryptopaste.png" align="left">
+<img src="public/img/cryptopaste.png" align="left">
 <h1>CryptoPaste <a href="https://travis-ci.org/HackThisCode/CryptoPaste" title="Travis-CI Build Status"><img src="https://travis-ci.org/HackThisCode/CryptoPaste.svg?branch=master"></a></h1>
 A secure, browser-side pastebin.
 
