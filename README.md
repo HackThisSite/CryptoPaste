@@ -96,6 +96,10 @@ An active demonstration of CryptoPaste can be found at https://cryptopaste.org
 
 Any time you upgrade, you must make sure to flush the `cache/twig/` folder of all content (minus the `.placeholder` file, of course).
 
+# License
+
+CryptoPaste is licensed under the **GNU General Public License v3.0**. More details are in the [LICENSE](LICENSE) file.
+
 # Acknowledgements
 
 CryptoPaste uses the following technologies:
