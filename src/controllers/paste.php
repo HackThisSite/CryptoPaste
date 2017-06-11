@@ -67,9 +67,11 @@ $app->post('/process.json', function (Request $req) use ($app) {
 
   // Set expiry value for database
   $expiry = -1;
+  $expire_txt = '';
   switch ($expiration) {
     case 'once':
       $expiry = 0;
+      $expire_txt = 'burn';
       break;
     case '10min':
       $expiry = gmdate('U') + 600;
@@ -92,8 +94,10 @@ $app->post('/process.json', function (Request $req) use ($app) {
     case 'never':
     default:
       $expiry = -1;
+      $expire_txt = 'Never';
       break;
   }
+  $expire_txt = (empty($expire_txt) ? gmdate('r', $expiry) : $expire_txt);
 
   // Do database insert and get ID
   $prefix = (!empty($app['config']['db']['table_prefix']) ? $app['config']['db']['table_prefix'] : '');
@@ -115,7 +119,7 @@ $app->post('/process.json', function (Request $req) use ($app) {
   return $app->json(array(
     'status'  => 'ok',
     'url'     => $url,
-    'expires' => ($expiry > 0 ? gmdate('r', $expiry) : 'Never'),
+    'expires' => $expire_txt,
   ));
 })->bind('process');
 

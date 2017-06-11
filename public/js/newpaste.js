@@ -203,7 +203,7 @@ $(document).ready(function() {
               $("#paste-url").val(data.url);
 
               // Show expiration
-              $("#submitted-expiry").text('This paste will expire: '+data.expires);
+              $("#submitted-expiry").text(data.expires == 'burn' ? 'This paste will be deleted once it is opened.' : 'This paste will expire: '+data.expires);
 
               // Show burn notice (hehe)
               if ($("#expiration").val() == 'once') $("#burn-notice").show();
