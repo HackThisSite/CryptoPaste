@@ -96,7 +96,7 @@ An active demonstration of CryptoPaste can be found at https://cryptopaste.org
 
 # Upgrade
 
-Any time you upgrade, you must make sure to flush the `cache/twig/` folder of all content (minus the `.placeholder` file, of course).
+Any time you upgrade, you must make sure to flush the `cache/twig/` folder of all content (minus the `.gitignore` file, of course).
 
 # License
 
