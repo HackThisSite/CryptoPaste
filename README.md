@@ -6,6 +6,8 @@ A secure, browser-side pastebin.
 
 CryptoPaste is a secure pastebin service inspired by [CryptoBin](https://cryptobin.org). Like CryptoBin, CryptoPaste strives to be a secure, stable and clean pastebin service, especially now that CryptoBin has seemingly shut its doors indefinitely.  The goal is to perform all encryption, decryption, and data handling in the user's browser so that the CryptoPaste host has both plausible deniability and the inability to comply with court orders or takedown requests.
 
+CryptoPaste is a [HackThisSite](https://www.hackthissite.org) project.
+
 # Features
 - Pastes are encrypted before being sent to the server
 - No passwords stored
