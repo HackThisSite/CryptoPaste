@@ -50,8 +50,14 @@ function setExpireTime() {
   } else if(expiry == 0) {
   	$("#expiry").html("Burn After Reading(This paste has been deleted)");
   } else {
-    // Set expire time
-    var expireTime = getTimeStampCount(expiry - Date.now() / 1000);
+    var secondsLeft = expiry - Date.now() / 1000;
+    // Check if paste has expired and set expire time
+    if (secondsLeft > 0) {
+      var expireTime = getTimeStampCount(secondsLeft);
+    } else {
+      var expireTime = "Paste has expired";
+    }
+
     var expirystr = new Date(expiry * 1000).toLocaleString();
     $("#expiry").html(expirystr+' (<em>'+expireTime+'</em>)');
   }
