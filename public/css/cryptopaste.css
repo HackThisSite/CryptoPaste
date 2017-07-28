@@ -40,3 +40,6 @@ form textarea.horiz {
   max-height: 50px;
   width: auto;
 }
+#btn-submit {
+  white-space: normal;
+}
