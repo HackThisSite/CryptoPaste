@@ -175,6 +175,7 @@ $app->get('/{paste_id}', function (Request $req, $paste_id) use ($app) {
     'timestamp'  => $data['timestamp'],
     'paste'      => $data['data'],
     'views'      => ++$data['views'],
+    'expiry'	 => $data['expiry'],
     'burnnotice' => $burnnotice,
   ));
 })->bind('view')
