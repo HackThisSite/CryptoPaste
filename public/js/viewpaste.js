@@ -129,11 +129,14 @@ $(document).ready(function() {
     setElapsedTime();
   }, 1000);
 
-  // Update expire time and start timestamp counter
-  setExpireTime();
-  setInterval(function() {
+  // Check if show expiry is enabled
+  if (typeof expiry !== 'undefined') {
+    // Update expire time and start timestamp counter
     setExpireTime();
-  }, 1000);
+    setInterval(function() {
+      setExpireTime();
+    }, 1000);
+  }
 
   // Password field key press
   $("#password").keypress(function(event) {
