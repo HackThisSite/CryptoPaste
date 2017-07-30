@@ -11,6 +11,9 @@
 <script type="text/javascript" src="{{ asset('viewpaste.js', 'js') }}"></script>
 <script>
   var timestamp = {{ timestamp }};
+  {% if show_expiry is defined %}
+    var expiry = {{ expiry }}
+  {% endif %}
 </script>
 {% endblock %}
 {% block content %}
@@ -40,6 +43,10 @@
         <div class="form-group clearfix">
           <p class="pull-left">
             Created: <span id="timestamp">-</span>
+            {% if show_expiry is defined %}
+              <br>
+              Expires: <span id="expiry">-</span>
+            {% endif %}
           </p>
           <p class="pull-right">
             Views: {{ views }}

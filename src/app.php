@@ -205,6 +205,10 @@ $app->before(function (Request $req) use ($app) {
     }
     $app['twig']->addGlobal('total_pastes', number_format($total));
   }
+  // Show expiry
+  if ($app['config']['ui']['show_expiry']) {
+    $app['twig']->addGlobal('show_expiry', true);
+  }
 });
 
 

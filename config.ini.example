@@ -23,6 +23,9 @@ admin_contact = mailto:admin@mywebsite.com
 ; Runs a DB query on every page load
 show_paste_total = true
 
+; Show expirations on view paste
+show_expiry = true
+
 
 [db]
 

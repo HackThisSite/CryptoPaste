@@ -1,7 +1,6 @@
-// Set elapsed time
-function setElapsedTime() {
+// Get timestamp count given time in seconds
+function getTimeStampCount(seconds){
   // Set number values
-  var seconds = Date.now() / 1000 - timestamp;
   var minutes = seconds / 60;
   seconds %= 60;
   var hours = minutes / 60;
@@ -13,28 +12,55 @@ function setElapsedTime() {
   var years = weeks / 52;
   weeks %= 52;
   // Create string
-  var elapsedTime = "";
+  var timeStampCount = "";
   if (years >= 1) {
-    elapsedTime += Math.floor(years) + "y ";
+    timeStampCount += Math.floor(years) + "y ";
   }
-  if (weeks >= 1 || elapsedTime) {
-    elapsedTime += Math.floor(weeks) + "w ";
+  if (weeks >= 1 || timeStampCount) {
+    timeStampCount += Math.floor(weeks) + "w ";
   }
-  if (days >= 1 || elapsedTime) {
-    elapsedTime += Math.floor(days) + "d ";
+  if (days >= 1 || timeStampCount) {
+    timeStampCount += Math.floor(days) + "d ";
   }
-  if (hours >= 1 || elapsedTime) {
-    elapsedTime += Math.floor(hours) + "h ";
+  if (hours >= 1 || timeStampCount) {
+    timeStampCount += Math.floor(hours) + "h ";
   }
-  if (minutes >= 1 || elapsedTime) {
-    elapsedTime += Math.floor(minutes) + "m ";
+  if (minutes >= 1 || timeStampCount) {
+    timeStampCount += Math.floor(minutes) + "m ";
   }
-  if (seconds >= 1 || elapsedTime) {
-    elapsedTime += Math.floor(seconds) + "s";
+  if (seconds >= 1 || timeStampCount) {
+    timeStampCount += Math.floor(seconds) + "s";
   }
-  // Set string to element
+  // Return timestamp count
+  return timeStampCount;
+}
+
+// Set elapsed time
+function setElapsedTime() {
+  var elapsedTime = getTimeStampCount(Date.now() / 1000 - timestamp);
   var timestr = new Date(timestamp * 1000).toLocaleString();
   $("#timestamp").html(timestr+' (<em>'+elapsedTime+' ago</em>)');
+}
+
+// Set expire time
+function setExpireTime() {
+  // Check expiry and set string to element	
+  if (expiry == -1) {
+  	$("#expiry").html("Never");
+  } else if(expiry == 0) {
+  	$("#expiry").html("Burn After Reading(This paste has been deleted)");
+  } else {
+    var secondsLeft = expiry - Date.now() / 1000;
+    // Check if paste has expired and set expire time
+    if (secondsLeft > 0) {
+      var expireTime = getTimeStampCount(secondsLeft);
+    } else {
+      var expireTime = "Paste has expired";
+    }
+
+    var expirystr = new Date(expiry * 1000).toLocaleString();
+    $("#expiry").html(expirystr+' (<em>'+expireTime+'</em>)');
+  }
 }
 
 // Show error alert
@@ -97,11 +123,20 @@ $(document).ready(function() {
     }
   });
 
-  // Update and start timestamp counter
+  // Update elapsed time and start timestamp counter
   setElapsedTime();
   setInterval(function() {
     setElapsedTime();
   }, 1000);
+
+  // Check if show expiry is enabled
+  if (typeof expiry !== 'undefined') {
+    // Update expire time and start timestamp counter
+    setExpireTime();
+    setInterval(function() {
+      setExpireTime();
+    }, 1000);
+  }
 
   // Password field key press
   $("#password").keypress(function(event) {
