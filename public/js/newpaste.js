@@ -168,7 +168,7 @@ $(document).ready(function() {
       setFormReadonly(true);
 
       // Encrypt the plain text using the password to a Base64 string
-      var enc_paste = sjcl.codec.base64.fromBits(sjcl.codec.utf8String.toBits(sjcl.encrypt($("#password").val(), original, {ks: 256})));
+      var enc_paste = sjcl.codec.base64.fromBits(sjcl.codec.utf8String.toBits(sjcl.encrypt($("#password").val(), original, {mode:"gcm", ks: 256})));
       $("#paste").val(enc_paste);
 
       // Check that the paste text is below the maximum character limit

@@ -158,7 +158,7 @@ $(document).ready(function() {
     // Attempt to decrypt paste
     try {
       // Decrypt, escape, and set paste
-      var decrypted = sjcl.decrypt($("#password").val(), sjcl.codec.utf8String.fromBits(sjcl.codec.base64.toBits($("#paste").html())), {ks: 256});
+      var decrypted = sjcl.decrypt($("#password").val(), sjcl.codec.utf8String.fromBits(sjcl.codec.base64.toBits($("#paste").html())));
       cleaned_paste = decrypted.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       $("#paste").html(cleaned_paste);
 
