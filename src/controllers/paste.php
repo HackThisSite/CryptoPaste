@@ -86,10 +86,10 @@ $app->post('/process.json', function (Request $req) use ($app) {
       $expiry = gmdate('U') + 604800;
       break;
     case '1m':
-      $expiry = gmdate('U') + 18144000;
+      $expiry = gmdate('U') + 2592000;
       break;
     case '1y':
-      $expiry = gmdate('U') + 6622560000;
+      $expiry = gmdate('U') + 31536000;
       break;
     case 'never':
     default:
