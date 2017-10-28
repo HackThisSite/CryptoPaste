@@ -1,6 +1,7 @@
 <img src="public/img/cryptopaste.png" align="left">
-<h1>CryptoPaste <a href="https://travis-ci.org/HackThisCode/CryptoPaste" title="Travis-CI Build Status"><img src="https://travis-ci.org/HackThisCode/CryptoPaste.svg?branch=master"></a></h1>
+<h1>CryptoPaste</h1>
 A secure, browser-side encrypted pastebin.
+<a href="https://travis-ci.org/HackThisCode/CryptoPaste" title="Travis-CI Build Status"><img src="https://travis-ci.org/HackThisCode/CryptoPaste.svg?branch=master"></a> <a href='https://www.versioneye.com/user/projects/59f514dd2de28c1e03d950b2'><img src='https://www.versioneye.com/user/projects/59f514dd2de28c1e03d950b2/badge.svg?style=flat-square' alt="Dependency Status" /></a>
 
 # About
 
