@@ -1,0 +1,18 @@
+{% extends ["custom/_template.html.twig", "default/_template.html.twig"] %}
+{% set title = "Uh oh!" %}
+{% set breadcrumb = {'icon': 'alert', 'text': 'Uh oh!'} %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <div class="alert alert-warning text-center">
+      <h3><strong>{{ heading }}</strong></h3>
+      <p>{{ message|raw }}</p>
+    </div>
+  </div>
+</div>
+{% if global.debug %}
+<pre>
+{{ debug|default('') }}
+</pre>
+{% endif %}
+{% endblock %}
