@@ -42,8 +42,12 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
 {% for page in pages.getPages() %}
+{% if page.slug is defined %}
 {% if page.slug|substr(0,1) != '_' %}
             <li><a href="{{ path('page', {page: page.slug}) }}">{{ page.name }}</a></li>
+{% endif %}
+{% else %}
+            <li><a href="{{ page.url }}">{{ page.name }}</a></li>
 {% endif %}
 {% endfor %}
             <li><a href="{{ path('new') }}">New Paste</a></li>

@@ -97,6 +97,8 @@ server {
 
 # Upgrade
 
+Because Silex is now end-of-life, CryptoPaste v1.0 is a complete recode in the Symfony 3.4 framework. This has resulted in some major changes, but your data should be portable from a v0.x version of CryptoPaste.
+
 ## Warning about SQLite
 
 CryptoPaste v1.x no longer supports SQLite. If you were using SQLite, please convert it to a MySQL database, table name of `cryptopaste`, and follow the upgrade procedure below.
@@ -161,16 +163,20 @@ If your page filename starts with an underscore (`_`), then the page will not be
 
 ### Modify the menu
 
-If you want your custom page to be visible in the top menu bar, you will need to create a `app/Resources/views/custom/_menu.yaml.twig` file. You can copy the default `app/Resources/views/default/_menu.yaml.twig` to start and modify as needed. You can also use this to hide the default FAQ page if you don't want to show it.
+If you want your custom page, or an outside URL, to be visible in the top menu bar, you will need to create a `app/Resources/views/custom/_menu.yaml.twig` file. You can copy the default `app/Resources/views/default/_menu.yaml.twig` to start and modify as needed. You can also use this to hide the default FAQ page if you don't want to show it.
 
-The `_menu.yaml.html` file must start with a `menu` key, and each menu item is a list of two keys. Those keys must include:
-* **slug** - The slug of your custom page (the part of the filename just before the `.html.twig` extension)
+The `_menu.yaml.html` file must start with a `menu` key, and each menu item is a list of two keys. You must have the **name** key set, and either **slug** or **url**:
 * **name** - The name to show in the menu
+* **slug** - The slug of your custom page (the part of the filename just before the `.html.twig` extension)
+* **url** - A URL to point to
 
-Shown below is an example of a custom menu with the default FAQ page, and your new privacy policy custom page. Note that this list is ordered top-to-bottom == left-to-right. So the menu example below would render the menu as: 'Privacy Policy | FAQ | New Paste' ('New Paste' is always shown).
+Shown below is an example of a custom menu with the default FAQ page, a privacy policy custom page, and a link to an outside website. Note that this list is ordered top-to-bottom == left-to-right. So the menu example below would render the menu as: 'HackThisSite | Privacy Policy | FAQ | New Paste' ('New Paste' is always shown).
 
 <pre>
 menu:
+    -
+        name: 'HackThisSite'
+        url: 'https://www.hackthissite.org'
     -
         name: 'Privacy Policy'
         slug: privacy

@@ -10,7 +10,6 @@ parameters:
     body_max_length: 3145728
     session_lifetime: 86400
 
-
 framework:
     #esi: ~
     #translator: { fallbacks: ['%locale%'] }
@@ -31,8 +30,10 @@ framework:
     trusted_hosts: ~
     session:
         # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-        handler_id: session.handler.native_file
+        # handler_id: session.handler.native_file
+        handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
         save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+        name: cryptopaste
     fragments: ~
     http_method_override: true
     assets: ~
@@ -50,14 +51,13 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver: '%database_driver%'
+        driver: pdo_mysql
         host: '%database_host%'
         port: '%database_port%'
         dbname: '%database_name%'
         user: '%database_user%'
         password: '%database_password%'
         charset: UTF8
-        path: '%database_path%'
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore

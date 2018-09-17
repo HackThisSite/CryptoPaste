@@ -1,6 +1,11 @@
 {% extends ["custom/_template.html.twig", "default/_template.html.twig"] %}
 {% set title = "Frequently Asked Questions" %}
 {% set breadcrumb = {'icon': 'question-sign', 'text': 'Frequently Asked Questions'} %}
+{% if contact is email %}
+{% set contact_url = 'mailto:' ~ contact %}
+{% else %}
+{% set contact_url = contact %}
+{% endif %}
 {%
 set faq = [
   {
@@ -53,7 +58,7 @@ set faq = [
   },
   {
     'title': 'My question was not answered here.',
-    'entry': 'If your question is regarding the CryptoPaste software itself, you can open a <a href="https://github.com/HackThisCode/CryptoPaste/issues" target="_blank">Github issue</a>. If your question is regarding this installation of CryptoPaste, you can reach the owner of this site here: <a href="%s">%s</a>'|format(contact, contact),
+    'entry': 'If your question is regarding the CryptoPaste software itself, you can open a <a href="https://github.com/HackThisCode/CryptoPaste/issues" target="_blank">Github issue</a>. If your question is regarding this installation of CryptoPaste, you can reach the owner of this site here: <a href="%s">%s</a>'|format(contact_url, contact),
   },
 ]
 %}

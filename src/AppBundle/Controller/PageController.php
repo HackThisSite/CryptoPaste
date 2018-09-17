@@ -13,6 +13,9 @@ class PageController extends Controller {
   /**
    * Renders a static page
    *
+   * 'requirements' below blocks pages starting with underscore, and does not allow
+   * slashes (preventing directory transversal).
+   *
    * @Route(
    *     "/p/{page}",
    *     name="page",
@@ -26,9 +29,8 @@ class PageController extends Controller {
     if (empty($page_path)) {
       throw $this->createNotFoundException('Page not found');
     }
-    return $this->render($page_path, array(
-      'contact' => 'foobar',
-    ));
+    $params = ($page == 'faq' ? array('contact' => $this->getParameter('admin_contact')) : array());
+    return $this->render($page_path, $params);
   }
 
 }

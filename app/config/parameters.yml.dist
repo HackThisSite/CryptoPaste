@@ -1,39 +1,32 @@
 parameters:
 
-    # Driver: either pdo_mysql or pdo_sqlite
-    database_driver: pdo_mysql
-
-    # Host: Required for MySQL
+    # MySQL host
     database_host: 127.0.0.1
 
-    # Port: Required for MySQL only if the port is not default (3306)
+    # MySQL port, required only if the port is not default (3306)
     database_port: ~
 
-    # Name: Name of the databse for CryptoPaste
+    # Name of the databse for CryptoPaste
     database_name: cryptopaste
 
-    # User: MySQL user. Must have full rights to database to perform database commands from CLI.
+    # MySQL user. Must have full rights to database if being used by CLI.
     database_user: cryptopaste
 
-    # Password: MySQL password
+    # MySQL password
     database_password: ~
-
-    # If using SQLite, example: '%kernel.project_dir%/var/data/data.sqlite'
-    # Leave this blank if not using SQLite
-    database_path: ~
 
     # Prefix (including any underscore) for database tables
     database_table_prefix: ~
 
     # A secret key that's used to generate certain security-related tokens
-    # This should also match your old Hashids value
+    # If upgrading from v0.x, this must match your Hashids secret
     secret: ThisTokenIsNotSoSecretChangeIt
 
     # Length of paste random ID
     uri_length: 8
 
     # href=".." content of an <a> tag in the FAQ
-    # Can be an email or URL. Bare email addresses will be auto-formatted.
+    # Can be an email or URL. Bare email addresses will be auto-formatted ("mailto:" not needed).
     admin_contact: admin@mywebsite.com
 
     # Show total pastes in the footer

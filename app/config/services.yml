@@ -34,6 +34,11 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+        arguments:
+            - !service { class: PDO, factory: 'database_connection:getWrappedConnection' }
+            - { db_table: '%database_table_prefix%sessions' }
+
 #    Application\Migrations\:
 #        resource: '../../app/DoctrineMigrations/*'
 #        arguments:
