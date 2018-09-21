@@ -9,6 +9,7 @@ parameters:
     locale: en
     body_max_length: 3145728
     session_lifetime: 86400
+    # Casts parameter to string to avoid config concatenation errors
     table_prefix: '%database_table_prefix%'
 
 framework:

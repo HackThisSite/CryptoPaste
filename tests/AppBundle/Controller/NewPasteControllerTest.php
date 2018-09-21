@@ -13,6 +13,6 @@ class NewPasteControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('CryptoPaste', $crawler->filter('#container h1')->text());
+        $this->assertContains('CryptoPaste', $crawler->filter('title')->text());
     }
 }

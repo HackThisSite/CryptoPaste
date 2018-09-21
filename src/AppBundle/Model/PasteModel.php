@@ -79,8 +79,7 @@ class PasteModel {
 
     // Delete paste if burn-after-reading is set
     if ($paste->getExpiry() === 0 && $volatile == true) {
-      $db->remove($paste);
-      $db->flush();
+      $this->deletePaste($paste);
     }
 
     // Return paste
@@ -90,12 +89,12 @@ class PasteModel {
   /**
    * Increment the view counter of a paste
    *
-   * @param string $paste_id String identifier of a paste
+   * @param AppBundle\Entity\Paste|string $paste_obj_or_id An AppBundle\Entity\Paste object, or string identifier of a paste
    * @return int|boolean Updated view counter of paste, or false if not found
    */
-  public function incrementViewCounter($paste_id) {
+  public function incrementViewCounter($paste_obj_or_id) {
     // Get Paste object
-    $paste = $this->getPaste($paste_id, false);
+    $paste = ($paste_obj_or_id instanceof Paste ? $paste_obj_or_id : $this->getPaste($paste_obj_or_id, false));
 
     // Return explicit false if paste not found
     if (empty($paste)) {
@@ -115,11 +114,11 @@ class PasteModel {
   /**
    * Deletes a specified paste
    *
-   * @param string $paste_id String identifier of a paste
+   * @param AppBundle\Entity\Paste|string $paste_obj_or_id An AppBundle\Entity\Paste object, or string identifier of a paste
    */
-  public function deletePaste($paste_id) {
+  public function deletePaste($paste_obj_or_id) {
     // Get Paste object
-    $paste = $this->getPaste($paste_id, false);
+    $paste = ($paste_obj_or_id instanceof Paste ? $paste_obj_or_id : $this->getPaste($paste_obj_or_id, false));
 
     // If paste is found, delete it
     if (!empty($paste)) {
