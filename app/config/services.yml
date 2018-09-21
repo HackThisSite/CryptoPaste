@@ -37,7 +37,7 @@ services:
     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
         arguments:
             - !service { class: PDO, factory: 'database_connection:getWrappedConnection' }
-            - { db_table: '%database_table_prefix%sessions' }
+            - { db_table: '%table_prefix%sessions' }
 
 #    Application\Migrations\:
 #        resource: '../../app/DoctrineMigrations/*'
