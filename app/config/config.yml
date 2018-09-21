@@ -9,6 +9,7 @@ parameters:
     locale: en
     body_max_length: 3145728
     session_lifetime: 86400
+    table_prefix: '%database_table_prefix%'
 
 framework:
     #esi: ~
@@ -64,7 +65,7 @@ doctrine:
         auto_mapping: true
 
 doctrine_migrations:
-    table_name: '%database_table_prefix%migration_versions'
+    table_name: '%table_prefix%migration_versions'
     name: 'CryptoPaste Database Migrations'
 
 # Swiftmailer Configuration

@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="pastes")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Paste {
 
@@ -63,6 +64,13 @@ class Paste {
   public function setTimestamp($timestamp) {
     $this->timestamp = $timestamp;
     return $this;
+  }
+
+  /**
+   * @ORM\PrePersist
+   */
+  public function setTimestampValue() {
+    $this->timestamp = intval(gmdate('U'));
   }
 
   public function getExpiry() {
