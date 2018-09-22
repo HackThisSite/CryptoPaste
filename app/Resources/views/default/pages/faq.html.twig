@@ -1,7 +1,7 @@
 {% extends ["custom/_template.html.twig", "default/_template.html.twig"] %}
 {% set title = "Frequently Asked Questions" %}
 {% set breadcrumb = {'icon': 'question-sign', 'text': 'Frequently Asked Questions'} %}
-{% if contact is email %}
+{% if contact is valid_email %}
 {% set contact_url = 'mailto:' ~ contact %}
 {% else %}
 {% set contact_url = contact %}

@@ -58,17 +58,18 @@ class PasteModel {
 
     // Get Paste object
     $db = $this->doctrine->getManager();
-    $query = $db->getRepository(Paste::class)->createQuery('
+    $query = $db->createQuery('
       SELECT p
       FROM AppBundle:Paste p
       WHERE
         p.id = :id
       AND (
-        p.expiry IN (0,-1) OR
+        p.expiry IN (:range) OR
         p.expiry < :expiration
       )
     ')
       ->setParameter('id', $pid)
+      ->setParameter('range', array(-1, 0))
       ->setParameter('expiration', intval(gmdate('U')));
     $paste = $query->getOneOrNullResult();
 

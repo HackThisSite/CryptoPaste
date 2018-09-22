@@ -23,7 +23,7 @@ framework:
         enabled: true
         csrf_protection:
             enabled: true
-            field_name: nonce
+#            field_name: nonce
     csrf_protection:
         enabled: true
     validation: { enable_annotations: true }

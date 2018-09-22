@@ -16,6 +16,12 @@ function showError(message) {
   $("#erralert").slideDown('fast');
 }
 
+// Hide error alert
+function hideError() {
+  $("#erralert").slideUp('fast');
+  $("#errmsg").text('');
+}
+
 // Enable/disable submit button
 function enableSubmit() {
   if ($("#password").val() && $("#paste").val() && $("#captcha_code").val()) {
@@ -159,6 +165,9 @@ $(document).ready(function() {
     // Halt if the button is disabled
     if ($(this).hasClass('disabled')) return false;
 
+    // Hide the error window if shown
+    hideError();
+
     // Keep a temporary copy of the plain text to restore if unsuccessful
     var original = $("#paste").val();
 
@@ -182,10 +191,12 @@ $(document).ready(function() {
           method: 'POST',
           dataType: 'json',
           data: {
-            'nonce': $("#nonce").val(),
-            'paste': enc_paste,
-            'expiry': $("#expiration").val(),
-            'captcha': $("#captcha_code").val(),
+            'paste': {
+              'nonce': $("#nonce").val(),
+              'paste': enc_paste,
+              'expiration': $("#expiration").val(),
+              'captcha': $("#captcha_code").val(),
+            },
           },
           success: function(data) {
             original = null;
@@ -283,7 +294,7 @@ $(document).ready(function() {
 
   // Close error alert
   $("#closeerr").click(function() {
-    $("#erralert").slideUp('fast');
+    hideError();
   });
 
   // Hide loading screen and show form once everything is loaded

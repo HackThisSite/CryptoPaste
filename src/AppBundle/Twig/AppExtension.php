@@ -16,7 +16,7 @@ class AppExtension extends AbstractExtension {
 
   public function getTests() {
     return array(
-      new TwigTest('email', array($this, 'is_email')),
+      new TwigTest('valid_email', array($this, 'is_email')),
     );
   }
 

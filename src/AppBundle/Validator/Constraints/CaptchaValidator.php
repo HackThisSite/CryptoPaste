@@ -12,6 +12,7 @@ class CaptchaValidator extends ConstraintValidator {
      $this->context
       ->buildViolation('CAPTCHA cannot be blank')
       ->addViolation();
+      return;
     }
 
     // Captcha options

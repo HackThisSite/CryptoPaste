@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Twig\TwigHelper;
+use AppBundle\Form\PasteFormGenerator;
 
 class NewController extends Controller {
 
@@ -15,8 +16,11 @@ class NewController extends Controller {
    *
    * @Route("/", name="new")
    */
-  public function newAction(Request $request, TwigHelper $view) {
-    return $this->render($view->getViewPath('new_paste.html.twig'));
+  public function newAction(Request $request, TwigHelper $view, PasteFormGenerator $generator) {
+    $form = $generator->generateForm();
+    return $this->render($view->getViewPath('new_paste.html.twig'), array(
+      'form' => $form->createView(),
+    ));
   }
 
 }

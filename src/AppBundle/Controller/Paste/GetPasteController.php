@@ -30,7 +30,6 @@ class GetPasteController extends Controller {
 
     // Get Paste object (volatile read, will delete burn-after-reading paste if applicable)
     $paste = $pastes->getPaste($paste_id);
-    $is_burnable = ($pastes->getExpiry() === 0);
 
     // Paste not found
     if (empty($paste)) {
@@ -40,7 +39,8 @@ class GetPasteController extends Controller {
       ), 404);
     }
 
-    // Set view count
+    // Set burn flag and view count
+    $is_burnable = ($paste->getExpiry() === 0);
     $views = ($is_burnable ? 1 : $pastes->incrementViewCounter($paste));
 
     // Return paste data

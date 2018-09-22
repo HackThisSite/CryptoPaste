@@ -2,13 +2,13 @@
 {% set title = "View Encrypted Paste" %}
 {% set breadcrumb = {'icon': 'paste', 'text': 'View Encrypted Paste'} %}
 {% block head %}
-<link rel="stylesheet" href="{{ asset('default.css', 'hjscss') }}">
+<link rel="stylesheet" href="{{ asset('css/hjs/default.css') }}">
 {% endblock %}
 {% block footerjs %}
-<script type="text/javascript" src="{{ asset('sjcl.js', 'js') }}">/* Stanford Javascript Crypto Library */</script>
-<script type="text/javascript" src="{{ asset('aes.js', 'js') }}">/* AES (Advanced Encryption Standard) implementation from Movable Type for backwards compatibility */</script>
-<script type="text/javascript" src="{{ asset('highlight.pack.js', 'js') }}"></script>
-<script type="text/javascript" src="{{ asset('viewpaste.js', 'js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/sjcl.js') }}">/* Stanford Javascript Crypto Library */</script>
+<script type="text/javascript" src="{{ asset('js/aes.js') }}">/* AES (Advanced Encryption Standard) implementation from Movable Type for backwards compatibility */</script>
+<script type="text/javascript" src="{{ asset('js/highlight.pack.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/viewpaste.js') }}"></script>
 <script>
   var timestamp = {{ timestamp }};
   {% if show_expiry is defined %}
@@ -22,7 +22,7 @@
     <div class="jumbotron">
       <h1>Loading</h1>
       <p>One moment please . . .</p>
-      <img src="{{ asset('loading.gif', 'img') }}" alt="Loading">
+      <img src="{{ asset('img/loading.gif') }}" alt="Loading">
     </div>
   </div>
 </div>

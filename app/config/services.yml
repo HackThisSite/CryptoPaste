@@ -29,15 +29,29 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+        arguments:
+            - !service { class: PDO, factory: 'database_connection:getWrappedConnection' }
+            - { db_table: '%table_prefix%sessions', lock_mode: 1 }
+
     AppBundle\Subscriber\TablePrefixSubscriber:
         arguments: ['%database_table_prefix%']
         tags:
             - { name: doctrine.event_subscriber }
 
-    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+    AppBundle\EventSubscriber\WebCronSubscriber:
         arguments:
-            - !service { class: PDO, factory: 'database_connection:getWrappedConnection' }
-            - { db_table: '%table_prefix%sessions' }
+            $kernel: '@kernel'
+            $enabled: '%enable_web_cron%'
+            $lockfile_path: '%kernel.project_dir%/var/web_cron.last'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    AppBundle\Form\PasteFormGenerator:
+        arguments:
+            $form_factory: '@Symfony\Component\Form\FormFactoryInterface'
+            $csrf: '@security.csrf.token_manager'
+            $body_max_length: '%body_max_length%'
 
 #    Application\Migrations\:
 #        resource: '../../app/DoctrineMigrations/*'

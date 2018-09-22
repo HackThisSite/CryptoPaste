@@ -1,6 +1,6 @@
 {% extends ["custom/_template.html.twig", "default/_template.html.twig"] %}
-{% set title = "Uh oh!" %}
-{% set breadcrumb = {'icon': 'alert', 'text': 'Uh oh!'} %}
+{% set title = "Error" %}
+{% set breadcrumb = {'icon': 'alert', 'text': 'Error'} %}
 {% block content %}
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2">
@@ -10,9 +10,4 @@
     </div>
   </div>
 </div>
-{% if global.debug %}
-<pre>
-{{ debug|default('') }}
-</pre>
-{% endif %}
 {% endblock %}

@@ -21,8 +21,8 @@ class SessionModel {
   public function deleteExpired() {
     $db = $this->doctrine->getManager();
     $query = $db->getRepository(Session::class)->createQueryBuilder('s')
-      ->where('s.sess_time + s.sess_lifetime <= :time')
-      ->setParameter('time', intval(gmdate('U')))
+      ->where('s.time + s.ttl <= :now')
+      ->setParameter('now', intval(gmdate('U')))
       ->getQuery();
     $sessions = $query->getResult();
     foreach ($sessions as $session) {

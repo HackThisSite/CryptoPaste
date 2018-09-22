@@ -35,3 +35,6 @@ parameters:
 
     # Show expirations on view paste
     show_paste_expiry: true
+
+    # Run cron by web (every hour) instead of by CLI
+    enable_web_cron: false

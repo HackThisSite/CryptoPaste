@@ -39,7 +39,7 @@ class Paste {
    *
    * @ORM\Column(name="views", type="integer", options={"default": 0})
    */
-  protected $views;
+  protected $views = 0;
 
   /**
    * Encrypted paste data
@@ -92,7 +92,11 @@ class Paste {
   }
 
   public function getData() {
-    return $this->data;
+    if (gettype($this->data) == 'resource' && get_resource_type($this->data) == 'stream') {
+      return stream_get_contents($this->data);
+    } else {
+      return $this->data;
+    }
   }
 
   public function setData($data) {

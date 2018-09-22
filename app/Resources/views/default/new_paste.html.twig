@@ -47,7 +47,8 @@
   </div>
 </div>
 
-<form class="form-horizontal collapse" id="new-paste">
+{{ form_start(form, {'attr': {'class': 'form-horizontal collapse', 'id': 'new-paste'}}) }}
+{{ form_widget(form.nonce, {'id': 'nonce'}) }}
   <fieldset>
     <div class="well well-sm">
 <!--
@@ -60,7 +61,7 @@
 <!--      <a href="#" class="btn btn-primary pull-right">Preview with Syntax Highlighting</a> -->
       <div class="form-group">
         <div class="col-lg-12">
-          <textarea class="form-control npinput" rows="3" id="paste" name="paste" placeholder="Paste your text here"></textarea>
+{{ form_widget(form.paste, {'id': 'paste', 'attr': {'class': 'form-control npinput', 'rows': 3}}) }}
 <!--          <span class="help-block">The text you put in the box above will be encrypted by your browser when you click Submit.</span> -->
         </div>
       </div>
@@ -75,16 +76,7 @@
                   Expiration
                 </legend>
               </label>
-              <select class="form-control npinput" id="expiration" name="expiration">
-                <option value="once">Burn After Reading</option>
-                <option value="10min">10 Minutes</option>
-                <option value="1h">1 Hour</option>
-                <option value="1d">1 Day</option>
-                <option value="1w">1 Week</option>
-                <option value="1m">1 Month</option>
-                <option value="1y">1 Year</option>
-                <option value="never" selected>Never Expires</option>
-              </select>
+{{ form_widget(form.expiration, {'id': 'expiration', 'attr': {'class': 'form-control npinput'}}) }}
               <span class="help-block">Set paste expiration. "Burn After Reading" deletes the paste immediately upon being viewed.</span>
             </div>
           </div>
@@ -100,7 +92,7 @@
                 </legend>
               </label>
               <div class="input-group">
-                <input type="password" class="form-control npinput" id="password" name="password" placeholder="Protect with a password or generate one">
+{{ form_widget(form.password, {'id': 'password', 'attr': {'class': 'form-control npinput'}}) }}
                 <span class="input-group-btn">
                   <button class="btn btn-primary" type="button" id="genpasswd">Generate Password</button>
                 </span>
@@ -150,7 +142,7 @@
                   </p>
                 </div>
               </div>
-              <input type="text" name="captcha" class="form-control npinput" id="captcha_code" placeholder="Type the CAPTCHA text here">
+{{ form_widget(form.captcha, {'id': 'captcha_code', 'attr': {'class': 'form-control npinput'}}) }}
             </div>
           </div>
         </div>
@@ -171,7 +163,7 @@
       </div>
     </div>
   </fieldset>
-</form>
+{{ form_end(form) }}
 
 <div class="row collapse" id="submitted">
   <div class="col-lg-8 col-lg-offset-2 text-center">

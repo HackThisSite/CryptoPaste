@@ -42,24 +42,20 @@ class CronRunCommand extends ContainerAwareCommand {
     }
     $this->log->debug('CRON: Running cron command');
 
-    // Set variables
-    $exit = 0;
-    $db = $this->doctrine->getManager();
-
     // Flush expired pastes
     $this->log->debug('CRON: Flushing expired pastes');
-    $pastes_flushed = $pastes->deleteExpired();
-    $this->log->info(sprintf('CRON: Flushed %d expired paste%s', count($pastes_flushed), (count($pastes_flushed) == 1 ? '' : 's')));
+    $pastes_flushed = $this->pastes->deleteExpired();
+    $this->log->info(sprintf('CRON: Flushed %d expired paste%s', $pastes_flushed, ($pastes_flushed == 1 ? '' : 's')));
 
     // Flush expired sessions
     $this->log->debug('CRON: Flushing expired sessions');
-    $sessions_flushed = $sessions->deleteExpired();
-    $this->log->info(sprintf('CRON: Flushed %d expired session%s', count($sessions_flushed), (count($sessions_flushed) == 1 ? '' : 's')));
+    $sessions_flushed = $this->sessions->deleteExpired();
+    $this->log->info(sprintf('CRON: Flushed %d expired session%s', $sessions_flushed, ($sessions_flushed == 1 ? '' : 's')));
 
     // Release lock
     $this->release();
     $this->log->debug('CRON: Command completed');
-    return $exit;
+    return 0;
   }
 
 }
