@@ -28,6 +28,7 @@
     "require": {
         "php": ">=7.0",
         "ext-dom": "*",
+        "ext-simplexml": "*",
         "ext-tokenizer": "*",
         "dapphp/securimage": "^3.6",
         "doctrine/doctrine-bundle": "^1.6",
