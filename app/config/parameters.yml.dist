@@ -31,10 +31,10 @@ parameters:
 
     # Show total pastes in the footer
     # Runs a lightweight DB query on every page load
-    show_paste_total: true
+    show_paste_total: false
 
     # Show expirations on view paste
-    show_paste_expiry: true
+    show_paste_expiry: false
 
     # Run cron by web (every hour) instead of by CLI
     enable_web_cron: false
