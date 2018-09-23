@@ -27,6 +27,8 @@
     },
     "require": {
         "php": ">=7.0",
+        "ext-dom": "*",
+        "ext-tokenizer": "*",
         "dapphp/securimage": "^3.6",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-migrations-bundle": "^1.3",
