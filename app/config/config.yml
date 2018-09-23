@@ -47,6 +47,7 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
+        show_total: '%show_paste_total%'
         max_length: '%body_max_length%'
         pages: '@AppBundle\Twig\TwigHelper'
 

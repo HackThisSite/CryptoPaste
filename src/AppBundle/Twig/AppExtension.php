@@ -3,10 +3,27 @@
 namespace AppBundle\Twig;
 
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 use Twig\TwigFilter;
 use Twig\TwigTest;
+use AppBundle\Model\PasteModel;
 
 class AppExtension extends AbstractExtension {
+
+  private $pastes;
+
+  public function __construct(PasteModel $pastes) {
+    $this->pastes = $pastes;
+  }
+
+  public function getFunctions() {
+    $pastes = $this->pastes;
+    return array(
+      new TwigFunction('total_pastes', function() use ($pastes) {
+        return $pastes->getTotalPastes();
+      }),
+    );
+  }
 
   public function getFilters() {
     return array(

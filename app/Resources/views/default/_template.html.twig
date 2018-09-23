@@ -92,8 +92,8 @@
           <p class="pull-right text-right">
             Powered by <a href="https://github.com/HackThisCode/CryptoPaste" target="_blank">CryptoPaste</a>, a <a href="https://www.hackthissite.org" target="_blank">HackThisSite</a> project &ndash;
             Download or fork this on <a href="https://github.com/HackThisCode/CryptoPaste" target="_blank">GitHub</a>
-{% if total_pastes is defined %}
-            &ndash; {{ total_pastes }} encrypted pastes
+{% if show_total %}
+            &ndash; {{ total_pastes() }} encrypted pastes
 {% endif %}
             <br />The owner of this site and the CryptoPaste project cannot be held liable or responsible for user-submitted content.
           </p>

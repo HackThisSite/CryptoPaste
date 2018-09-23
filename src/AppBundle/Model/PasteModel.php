@@ -88,6 +88,22 @@ class PasteModel {
   }
 
   /**
+   * Get the total amount of pastes, based on auto-incrememnt next value
+   *
+   * @todo Maybe move this into a stats table
+   * @return int Total amount of pastes
+   */
+  public function getTotalPastes() {
+    $prefix = $this->container->getParameter('database_table_prefix');
+    $db = $this->doctrine->getConnection();
+    $total = $db->fetchAssoc('
+      SELECT AUTO_INCREMENT AS next_id FROM information_schema.tables
+      WHERE table_name=? AND table_schema=DATABASE()
+    ', array($prefix.'pastes'));
+    return ($total['next_id'] - 1);
+  }
+
+  /**
    * Increment the view counter of a paste
    *
    * @param AppBundle\Entity\Paste|string $paste_obj_or_id An AppBundle\Entity\Paste object, or string identifier of a paste

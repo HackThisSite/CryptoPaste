@@ -15,6 +15,8 @@ CryptoPaste is a [HackThisSite](https://www.hackthissite.org) project.
 - No passwords stored
 - All identifying information is anonymized
 - Expired content is deleted forever
+- Web cron available
+- Template override supported
 
 # Demonstration
 An active demonstration of CryptoPaste can be found at https://cryptopaste.org
@@ -97,7 +99,7 @@ server {
 }
 </pre>
 
-4. Add a CRON entry to force deletion of expired pastes and sessions. Here is an example crontab entry that is run every hour as the `www-data` user:
+4. If you chose not to enable the web cron, add an entry to your crontab to ensure deletion of expired pastes and sessions. Here is an example crontab entry that is run every hour as the `www-data` user:
 
 <pre>
 0	*	*	*	*	www-data	/usr/bin/php /path/to/cryptopaste/bin/console cron:run
