@@ -121,6 +121,12 @@ CryptoPaste v1.x no longer supports SQLite. If you were using SQLite, please con
 
 4. When you run the `bin/console doctrine:migrations:migrate` command from the Installation instructions, this will automatically convert your database for CryptoPaste v1.x.
 
+## Post-upgrade
+
+After running an upgrade, always make sure to clear the application cache. You can do this by running the following command from the root directory of your CryptoPaste installation:
+
+`$ php bin/console cache:clear`
+
 # Modify the template
 
 Note that all template files are written in [Twig 2.0](https://twig.symfony.com). You can find the documentation for it [here](https://twig.symfony.com/doc/2.x/).
