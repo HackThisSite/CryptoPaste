@@ -2,7 +2,7 @@
 <h1>CryptoPaste</h1>
 A secure, browser-side encrypted pastebin.
 
-[![Build Status](https://travis-ci.org/HackThisSite/CryptoPaste.svg?branch=symfony)](https://travis-ci.org/HackThisSite/CryptoPaste)
+[![Build Status](https://travis-ci.org/HackThisSite/CryptoPaste.svg?branch=master)](https://travis-ci.org/HackThisSite/CryptoPaste)
 
 # About
 
