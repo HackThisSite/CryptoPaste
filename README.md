@@ -20,7 +20,7 @@ CryptoPaste is a [HackThisSite](https://www.hackthissite.org) project.
 An active demonstration of CryptoPaste can be found at https://cryptopaste.org
 
 # Prerequisites
-- PHP 5.6 or 7
+- PHP >= 7.0
 - Composer
 - MySQL / MariaDB
 
@@ -198,6 +198,7 @@ If a menu slug starts with an underscore (`_`), that menu item will be hidden.
 If you don't want to show anything in the menu except the 'New Paste' button, simply create an empty `_menu.yaml.twig` file in the `custom/` folder.
 
 # TODO
+- Modify view_paste, etc. to confirm view for burn-after-reading pastes (prevents social media or messenger app pre-loads from deleting burn-after-reading pastes)
 - (**Need Help!**) Write legitimate testing
 - (**Need Help!**) Fix the UI to have better responsive scaling and other improvements
 
