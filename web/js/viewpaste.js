@@ -267,4 +267,4 @@ $(document).ready(function() {
 });
 
 // Show a friendly message
-console.log("Guten tag! Feel free to inspect CryptoPaste's source code for proof of security! https://github.com/HackThisCode/CryptoPaste");
+console.log("Guten tag! Feel free to inspect CryptoPaste's source code for proof of security! https://github.com/HackThisSite/CryptoPaste");
