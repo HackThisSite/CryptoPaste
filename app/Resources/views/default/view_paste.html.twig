@@ -10,10 +10,9 @@
 <script type="text/javascript" src="{{ asset('js/highlight.pack.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/viewpaste.js') }}"></script>
 <script>
-  var timestamp = {{ timestamp }};
-  {% if show_expiry is defined %}
-    var expiry = {{ expiry }}
-  {% endif %}
+var get_paste_url = "{{ path('get')|raw }}";
+var paste_id = "{{ paste_id|raw }}";
+var burn = {{ is_burnable|json_encode|raw }};
 </script>
 {% endblock %}
 {% block content %}
@@ -27,13 +26,27 @@
   </div>
 </div>
 
+{% if is_burnable %}
+<div class="row collapse" id="confirm-view">
+  <div class="col-lg-8 col-lg-offset-2 text-center">
+    <div class="jumbotron">
+      <h3><strong>Confirmation Needed</strong></h3>
+      <p>This paste is set to "Burn After Reading", meaning once you click the button below it will be deleted from the database after it is loaded in your browser.</p>
+      <p>
+        <button type="button" class="btn btn-success btn-lg btn-block" id="confirm-view-btn">Load and burn paste</button>
+      </p>
+    </div>
+  </div>
+</div>
+{% endif %}
+
 <div class="collapse" id="view-paste">
-{% if burnnotice is not empty %}
+{% if is_burnable %}
   <div class="col-lg-8 col-lg-offset-2 text-center">
     <div class="alert alert-dismissible alert-info">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <h3><strong>Notice</strong></h3>
-      <p>{{ burnnotice }}</p>
+      <p>This paste has been deleted from the database now that you have opened it.</p>
     </div>
   </div>
 {% endif %}
@@ -43,13 +56,13 @@
         <div class="form-group clearfix">
           <p class="pull-left">
             Created: <span id="timestamp">-</span>
-            {% if show_expiry is defined %}
+{% if show_expiry %}
               <br>
               Expires: <span id="expiry">-</span>
-            {% endif %}
+{% endif %}
           </p>
           <p class="pull-right">
-            Views: {{ views }}
+            Views: <span id="views">-</span>
           </p>
         </div>
       </div>
@@ -58,7 +71,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="well well-sm">
-        <pre><code id="paste">{{ paste }}</code></pre>
+        <pre><code id="paste"></code></pre>
       </div>
     </div>
   </div>

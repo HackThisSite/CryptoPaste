@@ -1,3 +1,15 @@
+var timestamp;
+var expiry;
+
+// Scroll to top
+function scrollTop() {
+  try {
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+  } catch (e) {
+    window.scrollTo(0,0);
+  }
+}
+
 // Get timestamp count given time in seconds
 function getTimeStampCount(seconds){
   // Set number values
@@ -44,7 +56,7 @@ function setElapsedTime() {
 
 // Set expire time
 function setExpireTime() {
-  // Check expiry and set string to element	
+  // Check expiry and set string to element
   if (expiry == -1) {
   	$("#expiry").html("Never");
   } else if(expiry == 0) {
@@ -61,6 +73,11 @@ function setExpireTime() {
     var expirystr = new Date(expiry * 1000).toLocaleString();
     $("#expiry").html(expirystr+' (<em>'+expireTime+'</em>)');
   }
+}
+
+// Set views counter
+function setViews(views) {
+  $("#views").html(views);
 }
 
 // Show error alert
@@ -84,6 +101,62 @@ function enableDecrypt() {
       .attr('data-original-title', tooltip)
       .tooltip('fixTitle');
   }
+}
+
+function loadPaste() {
+  $.ajax({
+    url: get_paste_url,
+    method: 'GET',
+    data: {
+      'id': paste_id,
+    },
+    complete: function(jqXHR, status) {
+      $("#loading").slideUp('fast');
+    },
+    success: function(data) {
+      // Set variables
+      timestamp = data.timestamp;
+      expiry = data.expiry;
+      $("#paste").html(data.paste);
+
+      // Set views
+      setViews(data.views);
+
+      // Update elapsed time and start timestamp counter
+      setElapsedTime();
+      setInterval(function() {
+        setElapsedTime();
+      }, 1000);
+
+      // Check if show expiry is enabled
+      if (typeof expiry !== 'undefined') {
+        // Update expire time and start timestamp counter
+        setExpireTime();
+        setInterval(function() {
+          setExpireTime();
+        }, 1000);
+      }
+
+      $("#view-paste").slideDown('fast', function() {
+        scrollTop();
+  //      hljs.initHighlighting();
+      });
+    },
+    error: function(jqXHR, errtext) {
+      // Set JSON object
+      try {
+        var json = jQuery.parseJSON(jqXHR.responseText);
+      } catch (e) {
+        var json = {'message': 'A server error occurred. Please try again or inform the owner of this CryptoPaste.'};
+      }
+
+      // Show error
+      showError(json.message);
+
+      // Scroll to top
+      scrollTop();
+    }
+  });
 }
 
 // Define jQuery stuff
@@ -116,29 +189,24 @@ $(document).ready(function() {
         .addClass('hljs lang-'+$(this).val());
     }
     hljs.highlightBlock($("#paste").get(0));
-    try {
-      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-    } catch (e) {
-      window.scrollTo(0,0);
-    }
+    scrollTop();
   });
 
-  // Update elapsed time and start timestamp counter
-  setElapsedTime();
-  setInterval(function() {
-    setElapsedTime();
-  }, 1000);
+  // Bind close error alert
+  $("#closeerr").click(function() {
+    $("#erralert").slideUp('fast');
+  });
 
-  // Check if show expiry is enabled
-  if (typeof expiry !== 'undefined') {
-    // Update expire time and start timestamp counter
-    setExpireTime();
-    setInterval(function() {
-      setExpireTime();
-    }, 1000);
-  }
+  // Bind confirm view paste
+  $("#confirm-view-btn").click(function() {
+    $("#confirm-view").slideUp('fast', function() {
+      $("#loading").slideDown('fast', function() {
+        loadPaste();
+      });
+    });
+  });
 
-  // Password field key press
+  // Bind password field key press
   $("#password").keypress(function(event) {
     if (event.which == 13)
       event.preventDefault();
@@ -147,7 +215,7 @@ $(document).ready(function() {
     enableDecrypt();
   });
 
-  // Decrypt paste
+  // Bind decrypt paste
   $("#btn-decrypt").click(function() {
     // Halt if the button is disabled
     if ($(this).hasClass('disabled')) return false;
@@ -179,32 +247,22 @@ $(document).ready(function() {
         .val(null);
 
       // Scroll to top
-      try {
-        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-      } catch (e) {
-        window.scrollTo(0,0);
-      }
+      scrollTop();
     } catch (e) {
       showError(e);
     }
   });
 
-  // Close error alert
-  $("#closeerr").click(function() {
-    $("#erralert").slideUp('fast');
-  });
-
   // Hide loading screen and show paste once everything is loaded
-  $("#loading").slideUp('fast', function() {
-    $("#view-paste").slideDown('fast', function() {
-      try {
-        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-      } catch (e) {
-        window.scrollTo(0,0);
-      }
-//      hljs.initHighlighting();
+  if (burn) {
+    $("#loading").slideUp('fast', function() {
+      $("#confirm-view").slideDown('fast', function() {
+        scrollTop();
+      });
     });
-  });
+  } else {
+    loadPaste();
+  }
 
 });
 

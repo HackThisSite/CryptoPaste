@@ -216,9 +216,6 @@ $(document).ready(function() {
               // Show expiration
               $("#submitted-expiry").text(data.expires == 'burn' ? 'This paste will be deleted once it is opened.' : 'This paste will expire: '+data.expires);
 
-              // Show burn notice (hehe)
-              if ($("#expiration").val() == 'once') $("#burn-notice").show();
-
               // Select URL field when focused
               $("#paste-url").focus(function() {
                 $(this).select();

@@ -12,13 +12,13 @@ use AppBundle\Model\PasteModel;
 class ViewController extends Controller {
 
   /**
-   * Gets an encrypted paste and renders the view_paste view
+   * Render the view_paste page
    *
    * @Route("/{paste_id}", name="view")
    */
   public function viewAction(Request $request, TwigHelper $view, PasteModel $pastes, $paste_id) {
-    // Get Paste object (volatile read, will delete burn-after-reading paste if applicable)
-    $paste = $pastes->getPaste($paste_id);
+    // Get Paste object for headers (non-volatile read)
+    $paste = $pastes->getPaste($paste_id, false);
 
     // Paste not found
     if (empty($paste)) {
@@ -28,23 +28,11 @@ class ViewController extends Controller {
       )), 404);
     }
 
-    // Handle other burn-after-reading and view counter stuff
-    $is_burnable = ($paste->getExpiry() === 0);
-    if ($is_burnable) {
-      $burnnotice = 'This paste has been deleted from the database now that you have opened it.';
-      $views = 1;
-    } else {
-      $burnnotice = '';
-      $views = $pastes->incrementViewCounter($paste);
-    }
-
-    // Render paste
+    // Render view_paste
     return $this->render($view->getViewPath('view_paste.html.twig'), array(
-      'timestamp'  => $paste->getTimestamp(),
-      'paste'      => $paste->getData(),
-      'views'      => $views,
-      'expiry'	   => $paste->getExpiry(),
-      'burnnotice' => $burnnotice,
+      'paste_id'      => $paste_id,
+      'is_burnable'   => ($paste->getExpiry() === 0),
+      'show_expiry'   => $this->getParameter('show_paste_expiry'),
     ));
   }
 

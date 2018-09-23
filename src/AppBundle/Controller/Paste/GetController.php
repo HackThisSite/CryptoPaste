@@ -10,15 +10,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Twig\TwigHelper;
 use AppBundle\Model\PasteModel;
 
-class GetPasteController extends Controller {
+class GetController extends Controller {
 
   /**
-   * Fetch an encrypted paste. Used for burn-after-reading pastes to prevent social
-   * media or other mobile app preloads from burning a paste.
+   * Fetch an encrypted paste
    *
-   * @Route("/get_paste.json", name="get_paste")
+   * @Route("/get.json", name="get")
    */
-  public function processAction(Request $request, TwigHelper $view, PasteModel $pastes) {
+  public function getAction(Request $request, TwigHelper $view, PasteModel $pastes) {
     // Get paste ID
     $paste_id = $request->query->get('id');
     if (empty($paste_id)) {
@@ -44,13 +43,17 @@ class GetPasteController extends Controller {
     $views = ($is_burnable ? 1 : $pastes->incrementViewCounter($paste));
 
     // Return paste data
-    return new JsonResponse(array(
-      'timestamp' => $paste->getTimestamp(),
-      'paste'     => $paste->getData(),
-      'expiry'	  => $paste->getExpiry(),
-      'views'     => $views,
-      'burned'    => $is_burnable,
-    ));
+    $data = array(
+      'result'      => 'ok',
+      'timestamp'   => $paste->getTimestamp(),
+      'paste'       => $paste->getData(),
+      'views'       => $views,
+      'is_burnable' => $is_burnable,
+    );
+    if ($this->getParameter('show_paste_expiry')) {
+      $data['expiry'] = $paste->getExpiry();
+    }
+    return new JsonResponse($data);
   }
 
 }

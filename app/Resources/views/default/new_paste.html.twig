@@ -2,9 +2,9 @@
 {% set breadcrumb = {'icon': 'plus-sign', 'text': 'New Paste'} %}
 {% block footerjs %}
 <script>
-  window.maxlength = {{ max_length }};
-  process_url = "{{ path('process') }}";
-  captcha_img_url = "{{ path('captcha', {'_format': 'png'}) }}";
+window.maxlength = {{ max_length }};
+process_url = "{{ path('process')|raw }}";
+captcha_img_url = "{{ path('captcha', {'_format': 'png'})|raw }}";
 </script>
 <script type="text/javascript" src="{{ asset('js/sjcl.js') }}">/* Stanford Javascript Crypto Library */</script>
 <script type="text/javascript" src="{{ asset('js/aes.js') }}">/* AES (Advanced Encryption Standard) implementation from Movable Type for backwards compatibility */</script>
@@ -181,14 +181,6 @@
       </div>
       <p id="submitted-expiry"></p>
       <p>Make sure you safely and securely share the password for this paste!</p>
-      <div class="row collapse" id="burn-notice">
-        <div class="col-lg-8 col-lg-offset-2 text-center">
-          <div class="alert alert-warning">
-            <h3><strong>Warning!</strong></h3>
-            Your paste was set to "Burn After Reading". Be careful how you share this URL, as sometimes social media or messaging apps will pre-load the URL, and this might delete the paste!
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
