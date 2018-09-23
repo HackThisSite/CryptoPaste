@@ -1,9 +1,9 @@
 {
-    "name": "hackthiscode/cryptopaste",
-    "version": "v0.1.0",
+    "name": "hackthissite/cryptopaste",
+    "version": "v1.0.0",
     "description": "A secure, client-side encrpyted pastebin.",
     "license": "GPL-3.0+",
-    "homepage": "https://github.com/HackThisCode/CryptoPaste",
+    "homepage": "https://github.com/HackThisSite/CryptoPaste",
     "authors": [
         {
             "name": "HackThisSite",
@@ -15,39 +15,67 @@
     "support": {
         "irc": "irc://irc.hackthissite.org/cryptopaste"
     },
+    "autoload": {
+        "psr-4": {
+            "AppBundle\\": "src/AppBundle"
+        },
+        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+    },
+    "autoload-dev": {
+        "psr-4": { "Tests\\": "tests/" },
+        "files": [ "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php" ]
+    },
     "require": {
-        "php": "^7.0",
-        "ext-bcmath": "*",
-        "ext-ctype": "*",
-        "ext-filter": "*",
-        "ext-gd": "*",
-        "ext-hash": "*",
-        "ext-iconv": "*",
-        "ext-json": "*",
-        "ext-mbstring": "*",
-        "ext-openssl": "*",
-        "ext-pcre": "*",
-        "ext-pdo": "*",
-        "ext-pdo_mysql": "*",
-        "ext-session": "*",
-        "ext-zlib": "*",
-        "silex/silex": "~2.0",
-        "twig/twig": "^2.3",
-        "symfony/asset": "^3.2",
-        "symfony/twig-bridge": "^3.2",
-        "monolog/monolog": "^1.22",
-        "doctrine/dbal": "^2.5",
+        "php": ">=7.0",
         "dapphp/securimage": "^3.6",
-        "symfony/validator": "^3.2",
-        "symfony/security-csrf": "^3.2",
-        "silex/web-profiler": "^2.0",
-        "symfony/monolog-bridge": "^3.2",
-        "symfony/debug-bundle": "^3.2",
-        "sorien/silex-dbal-profiler": "^2.0",
-        "hashids/hashids": "^2.0"
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/doctrine-migrations-bundle": "^1.3",
+        "doctrine/orm": "^2.5",
+        "hashids/hashids": "^1.0",
+        "incenteev/composer-parameter-handler": "^2.0",
+        "sensio/distribution-bundle": "^5.0.19",
+        "sensio/framework-extra-bundle": "^5.0.0",
+        "symfony/monolog-bundle": "^3.1.0",
+        "symfony/polyfill-apcu": "^1.0",
+        "symfony/swiftmailer-bundle": "^2.6.4",
+        "symfony/symfony": "3.4.*",
+        "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.1",
-        "phpunit/dbunit": "^3.0"
+        "sensio/generator-bundle": "^3.0",
+        "symfony/phpunit-bridge": "^3.0"
+    },
+    "scripts": {
+        "symfony-scripts": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "post-install-cmd": [
+            "@symfony-scripts"
+        ],
+        "post-update-cmd": [
+            "@symfony-scripts"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
+        "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
+        "symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        },
+        "branch-alias": {
+            "dev-master": "3.4-dev"
+        }
     }
 }

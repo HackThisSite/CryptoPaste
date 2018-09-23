@@ -1,0 +1,114 @@
+{% extends ["custom/_template.html.twig", "default/_template.html.twig"] %}
+{% set title = "View Encrypted Paste" %}
+{% set breadcrumb = {'icon': 'paste', 'text': 'View Encrypted Paste'} %}
+{% block head %}
+<link rel="stylesheet" href="{{ asset('css/hjs/default.css') }}">
+{% endblock %}
+{% block footerjs %}
+<script type="text/javascript" src="{{ asset('js/sjcl.js') }}">/* Stanford Javascript Crypto Library */</script>
+<script type="text/javascript" src="{{ asset('js/aes.js') }}">/* AES (Advanced Encryption Standard) implementation from Movable Type for backwards compatibility */</script>
+<script type="text/javascript" src="{{ asset('js/highlight.pack.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/viewpaste.js') }}"></script>
+<script>
+var get_paste_url = "{{ path('get')|raw }}";
+var paste_id = "{{ paste_id|raw }}";
+var burn = {{ is_burnable|json_encode|raw }};
+</script>
+{% endblock %}
+{% block content %}
+<div class="row" id="loading">
+  <div class="col-lg-8 col-lg-offset-2 text-center">
+    <div class="jumbotron">
+      <h1>Loading</h1>
+      <p>One moment please . . .</p>
+      <img src="{{ asset('img/loading.gif') }}" alt="Loading">
+    </div>
+  </div>
+</div>
+
+{% if is_burnable %}
+<div class="row collapse" id="confirm-view">
+  <div class="col-lg-8 col-lg-offset-2 text-center">
+    <div class="jumbotron">
+      <h3><strong>Confirmation Needed</strong></h3>
+      <p>This paste is set to "Burn After Reading", meaning once you click the button below it will be deleted from the database after it is loaded in your browser.</p>
+      <p>
+        <button type="button" class="btn btn-success btn-lg btn-block" id="confirm-view-btn">Load and burn paste</button>
+      </p>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="collapse" id="view-paste">
+{% if is_burnable %}
+  <div class="col-lg-8 col-lg-offset-2 text-center">
+    <div class="alert alert-dismissible alert-info">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <h3><strong>Notice</strong></h3>
+      <p>This paste has been deleted from the database now that you have opened it.</p>
+    </div>
+  </div>
+{% endif %}
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="well well-sm">
+        <div class="form-group clearfix">
+          <p class="pull-left">
+            Created: <span id="timestamp">-</span>
+{% if show_expiry %}
+              <br>
+              Expires: <span id="expiry">-</span>
+{% endif %}
+          </p>
+          <p class="pull-right">
+            Views: <span id="views">-</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="well well-sm">
+        <pre><code id="paste"></code></pre>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 text-center">
+      <div class="well well-sm">
+        <div class="form-group">
+          <label for="hjslist" class="control-label">
+            <legend>
+              Syntax Highlighting
+            </legend>
+          </label>
+          <select class="form-control" id="hjslist" data-toggle="tooltip" data-placement="top" title="You must first decrypt the paste before you can choose syntax highlighting." disabled>
+            <option value="">None</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 text-center">
+      <div class="well well-sm">
+        <div class="form-group">
+          <label for="password" class="control-label">
+            <legend>
+              Password
+            </legend>
+          </label>
+          <input type="password" class="form-control npinput" id="password" name="password" placeholder="Enter the password associated with this encrypted paste">
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 text-center">
+      <div class="well well-sm">
+        <button type="button" class="btn btn-success btn-lg btn-block disabled" id="btn-decrypt" data-toggle="tooltip" data-placement="top" title="You must enter the password to decrypt this paste.">
+          Decrypt Paste
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

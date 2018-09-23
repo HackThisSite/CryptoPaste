@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file. Versions fo
 ### Added
 - Nothing yet, submit Pull Requests!
 
+## [1.0.0] - 2018-09-xx - First release "[Rijmen](https://en.wikipedia.org/wiki/Vincent_Rijmen)"
+### Changed
+- Completely recoded everything in the Symfony 3.4 framework
+- Fixed opened bugs
+- Added functionality that confirms loading a burn-after-reading paste (prevents social media or messenger app pre-loads from deleting them)
+
 ## [0.1.0] - 2017-06-11 - Initial Beta "[Daemen](https://en.wikipedia.org/wiki/Joan_Daemen)"
 ### Added
 - Initial Silex structure, controllers, and Doctrine DB interfaces

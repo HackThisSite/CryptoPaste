@@ -1,0 +1,40 @@
+parameters:
+
+    # MySQL host
+    database_host: 127.0.0.1
+
+    # MySQL port, required only if the port is not default (3306)
+    database_port: ~
+
+    # Name of the databse for CryptoPaste
+    database_name: cryptopaste
+
+    # MySQL user. Must have full rights to database if being used by CLI.
+    database_user: cryptopaste
+
+    # MySQL password
+    database_password: ~
+
+    # Prefix (including any underscore) for database tables
+    database_table_prefix: ~
+
+    # A secret key that's used to generate certain security-related tokens
+    # If upgrading from v0.x, this must match your Hashids secret
+    secret: ThisTokenIsNotSoSecretChangeIt
+
+    # Length of paste random ID
+    uri_length: 8
+
+    # href=".." content of an <a> tag in the FAQ
+    # Can be an email or URL. Bare email addresses will be auto-formatted ("mailto:" not needed).
+    admin_contact: admin@mywebsite.com
+
+    # Show total pastes in the footer
+    # Runs a lightweight DB query on every page load
+    show_paste_total: false
+
+    # Show expirations on view paste
+    show_paste_expiry: false
+
+    # Run cron by web (every hour) instead of by CLI
+    enable_web_cron: false
