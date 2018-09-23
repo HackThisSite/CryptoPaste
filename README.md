@@ -113,7 +113,7 @@ Because Silex is now end-of-life, CryptoPaste v1.0 is a complete recode in the S
 
 CryptoPaste v1.x no longer supports SQLite. If you were using SQLite, please convert it to a MySQL database, table name of `cryptopaste`, and follow the upgrade procedure below.
 
-## Upgrade from v0.x to v1.x
+## Upgrade from v0.1.x to v1.x
 
 1. Make sure to backup your database and your `config.ini` file! You will need the data from your `config.ini` in the next steps.
 
@@ -123,9 +123,27 @@ CryptoPaste v1.x no longer supports SQLite. If you were using SQLite, please con
 
 4. When you run the `bin/console doctrine:migrations:migrate` command from the Installation instructions, this will automatically convert your database for CryptoPaste v1.x.
 
-## Post-upgrade
+## Upgrade v1.x
 
-After running an upgrade, always make sure to clear the application cache. You can do this by running the following command from the root directory of your CryptoPaste installation:
+1. Make sure you backup your database and `app/config/parameters.yml` file!
+
+2. If you cloned this repository, `cd` into your CryptoPaste installation directory and run `git pull`. If not, you will need to clone or download this repository to a new directory, then move your old `app/config/parameters.yml` file and any custom templates into your that new directory.
+
+3. Next, run
+
+`$ composer install`
+
+Because CryptoPaste uses the Symfony framework, Composer will automatically prompt you for any new configuration settings. Unfortunately this does not include definitions in the prompts, so please read the comments in `app/config/parameters.yml.dist` for an explanation of what the configuration settings are.
+
+If you want to change the configuration settings later (i.e. changing to a DB user will limited permissions), they are saved in the `app/config/parameters.yml` file.
+
+4. Update the database using the following command:
+
+`$ php bin/console doctrine:migrations:migrate`
+
+This will update the database schema using the username and password specified in your `app/config/parameters.yml` file. The database user you specified will need enough permissions to modify the database and so forth. If you want to specify a different user to do this, edit the `app/config/parameters.yml` file.
+
+5. Clear the CryptoPaste application cache by running the following command:
 
 `$ php bin/console cache:clear`
 
