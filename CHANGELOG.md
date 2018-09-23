@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. Versions fo
 
 ## [1.0.0] - 2018-09-xx - First release "[Rijmen](https://en.wikipedia.org/wiki/Vincent_Rijmen)"
 ### Changed
-- Completely recoded everything into a Symfony 3.4 framework
+- Completely recoded everything in the Symfony 3.4 framework
 
 ## [0.1.0] - 2017-06-11 - Initial Beta "[Daemen](https://en.wikipedia.org/wiki/Joan_Daemen)"
 ### Added

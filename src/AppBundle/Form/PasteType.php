@@ -70,7 +70,9 @@ class PasteType extends AbstractType {
           'Never Expires'      => 'never',
         ),
         'data' => 'never',
-        'required' => false,
+        'expanded' => false,
+        'multiple' => false,
+        'required' => true,
         'constraints' => array(
           new NotBlank(array('message' => 'Expiration cannot be blank')),
         ),

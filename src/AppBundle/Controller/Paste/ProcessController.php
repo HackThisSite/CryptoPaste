@@ -27,16 +27,49 @@ class ProcessController extends Controller {
     if ($form->isSubmitted() && $form->isValid()) {
       $data = $form->getData();
 
+      // Set expiration
+      $expiry = -1;
+      $expire_txt = '';
+      switch ($data->getExpiration()) {
+        case 'once':
+          $expiry = 0;
+          $expire_txt = 'burn';
+          break;
+        case '10min':
+          $expiry = (intval(gmdate('U')) + 600);
+          break;
+        case '1h':
+          $expiry = (intval(gmdate('U')) + 3600);
+          break;
+        case '1d':
+          $expiry = (intval(gmdate('U')) + 86400);
+          break;
+        case '1w':
+          $expiry = (intval(gmdate('U')) + 604800);
+          break;
+        case '1m':
+          $expiry = (intval(gmdate('U')) + 2592000);
+          break;
+        case '1y':
+          $expiry = (intval(gmdate('U')) + 31536000);
+          break;
+        case 'never':
+        default:
+          $expiry = -1;
+          $expire_txt = 'Never';
+          break;
+      }
+      $expire_txt = (empty($expire_txt) ? gmdate('r', $expiry) : $expire_txt);
+
       // Get paste ID
-      $paste_id = $pastes->createPaste(-1, $data->getPaste());
+      $paste_id = $pastes->createPaste($expiry, $data->getPaste());
 
       // Get URL for that ID
       $url = $this->get('router')->generate('view', array(
         'paste_id' => $paste_id,
       ), UrlGeneratorInterface::ABSOLUTE_URL);
 
-      $expire_txt = 'Now';
-
+      // Return JSON response
       return new JsonResponse(array(
         'status'  => 'ok',
         'url'     => $url,
@@ -54,7 +87,7 @@ class ProcessController extends Controller {
       // Rotate nonce
       $nonce = $this->get('security.csrf.token_manager')->refreshToken('paste')->getValue();
 
-      // Return error
+      // Return JSON error
       return new JsonResponse(array(
         'status'  => 'error',
         'message' => 'Please correct the following errors and try again: '.implode('; ', $errors),

@@ -58,7 +58,7 @@ class Paste {
   }
 
   public function getTimestamp() {
-    return $this->timestamp;
+    return intval($this->timestamp);
   }
 
   public function setTimestamp($timestamp) {
@@ -74,7 +74,7 @@ class Paste {
   }
 
   public function getExpiry() {
-    return $this->expiry;
+    return intval($this->expiry);
   }
 
   public function setExpiry($expiry) {

@@ -65,7 +65,7 @@ class PasteModel {
         p.id = :id
       AND (
         p.expiry IN (:range) OR
-        p.expiry < :expiration
+        p.expiry > :expiration
       )
     ')
       ->setParameter('id', $pid)
